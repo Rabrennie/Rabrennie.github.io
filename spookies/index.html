@@ -225,12 +225,12 @@
 
 		function spookies(e)
 		{
-			console.log(e)
+			//console.log(e)
 			ghosties.push(new ghostie(e.x, e.y,ghostiesId))
 			if(!twoSpooky)
 			{
 				spookieCount += 1 * multiplier;
-				console.log("spooky");
+				//console.log("spooky");
 			}
 			else
 			{
@@ -240,7 +240,7 @@
 
 		function ghostie(x,y, id)
 		{
-			console.log(x,y)
+			//console.log(x,y)
 			this.x = x += Math.random()*200-100;
 			this.y = y;
 			this.id = id;
