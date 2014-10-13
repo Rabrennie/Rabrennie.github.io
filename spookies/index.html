@@ -264,8 +264,8 @@
 
 			this.element = document.body.appendChild(this.element);
 			this.element.style.position = "absolute";
-			this.element.style.left = this.x;
-			this.element.style.top = this.y;
+			this.element.style.left = this.x+"px";
+			this.element.style.top = this.y+"px";
 			this.element.addEventListener("click", spookies);
 			this.element.ondragstart = function() { return false; };
 
@@ -273,7 +273,7 @@
 			{
 
 				this.y -= 0.5;
-				this.element.style.top= this.y;
+				this.element.style.top= this.y+"px";
 
 			}
 		}
