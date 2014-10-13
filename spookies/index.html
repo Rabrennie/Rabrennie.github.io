@@ -222,7 +222,15 @@
 			items["spookySpiders"] = 0
 			items["jackOLantern"] = 0
 			
-			spookieCount = 0;			
+			spookieCount = 0;
+
+			gameLoop();
+			
+			items["skellingtons"] = 0
+			items["spookySpiders"] = 0
+			items["jackOLantern"] = 0
+			
+			spookieCount = 0;
 		}
 
 		function spookies(e)
@@ -345,7 +353,7 @@
 		function maximumSpookage()
 		{
 			document.getElementById("spookyBill").src = "spook.gif"
-			
+
 			document.body.style.background = "#000000"
 			document.body.style.color = "#FFFFFF"
 			twoSpooky = true;
