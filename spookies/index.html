@@ -1,5 +1,4 @@
 <html>
-
 <head>
 	<meta name="description" content="Spookie clicker. Some say it's 2Spooky4u. Click the picture of Bill Murray to earn spookies. ">
 	<title>Spookie Clicker</title>
@@ -167,6 +166,7 @@
 	<script>
 		
 		var spookieCount,
+			totalSpookies,
 			items = {},
 			itemsCost = {
 				jackOLantern : 100,
@@ -225,7 +225,7 @@
 			spookieCount = 0;
 
 			gameLoop();
-			
+
 			items["skellingtons"] = 0
 			items["spookySpiders"] = 0
 			items["jackOLantern"] = 0
@@ -311,38 +311,13 @@
 		
 		function buy(item)
 		{
-			if(item == "jackOLantern")
+			if( item != null && item != undefined)
 			{
-				if(spookieCount >= itemsCost["jackOLantern"])
+				if(spookieCount >= itemsCost[item])
 				{
-					spookieCount = spookieCount - itemsCost["jackOLantern"];
-					items["jackOLantern"] += 1;
-					if(items["jackOLantern"] % 10 == 0)
-					{
-						maximumSpookage();
-					}
-				}
-			}
-			if(item == "skellington")
-			{
-				if(spookieCount >= itemsCost["skellingtons"])
-				{
-					spookieCount = spookieCount - itemsCost["skellingtons"];
-					items["skellingtons"] += 1;
-					if(items["skellingtons"] % 10 == 0)
-					{
-						maximumSpookage();
-					}
-					
-				}
-			}
-			if(item == "spookySpider")
-			{
-				if(spookieCount >= itemsCost["spookySpiders"])
-				{
-					spookieCount = spookieCount - itemsCost["spookySpiders"];
-					items["spookySpiders"] += 1;
-					if(items["spookySpiders"] % 10 == 0)
+					spookieCount = spookieCount - itemsCost[item];
+					items[item] += 1;
+					if(items[item] % 10 == 0)
 					{
 						maximumSpookage();
 					}
@@ -438,8 +413,8 @@
 		window.addEventListener('load',function(){
 			document.getElementById("spookyBill").addEventListener("click", spookies);
 			document.getElementById("jackOLanternShop").addEventListener("click", function(){buy("jackOLantern");}, false);
-			document.getElementById("skellingtonShop").addEventListener("click", function(){buy("skellington");}, false);
-			document.getElementById("spookySpiderShop").addEventListener("click", function(){buy("spookySpider");}, false);
+			document.getElementById("skellingtonShop").addEventListener("click", function(){buy("skellingtons");}, false);
+			document.getElementById("spookySpiderShop").addEventListener("click", function(){buy("spookySpiders");}, false);
 			document.getElementById('spookyBill').ondragstart = function() { return false; };
 		});
 		
