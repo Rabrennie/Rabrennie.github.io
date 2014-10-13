@@ -124,7 +124,7 @@
 
 <body onload="load()" onunload="save()">
 
-	<div id="spookySkellington"><img id="spookyBill" src="spookybill.png" width="300" height="300"/></div>
+	<div id="spookySkellington"><img id="spookyBill" src="spookybill.jpg" width="300" height="300"/></div>
 	<br />
 	
 	<div id="maximumSpookage"><h1>MAXIMUM SPOOKAGE</h1><br/></div>
@@ -236,7 +236,8 @@
 			else
 			{
 				spookieCount +=1 * multiplier * 2;
-			}			
+			}
+			displayUpdate();		
 		}
 
 		function ghostie(x,y, id)
@@ -405,9 +406,9 @@
 		function gameUpdate()
 		{	
 
-			itemsCost["jackOLantern"] = 100 + Math.round(100 * Math.pow(items["jackOLantern"],1.05));
-			itemsCost["skellingtons"] = 500 + Math.round(500 * Math.pow(items["skellingtons"],1.05));
-			itemsCost["spookySpiders"] = 700 + Math.round(700 * Math.pow(items["spookySpiders"],1.05));
+			itemsCost["jackOLantern"] = 20 + Math.round(20 * Math.pow(items["jackOLantern"],1.09));
+			itemsCost["skellingtons"] = 50 + Math.round(50 * Math.pow(items["skellingtons"],1.09));
+			itemsCost["spookySpiders"] = 100 + Math.round(100 * Math.pow(items["spookySpiders"],1.09));
 			
 			sps = items["skellingtons"]*2 + items["spookySpiders"]*4;
 			multiplier = 1 + (0.5*items["jackOLantern"]);
