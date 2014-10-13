@@ -309,6 +309,10 @@
 				{
 					spookieCount = spookieCount - itemsCost["jackOLantern"];
 					items["jackOLantern"] += 1;
+					if(items["jackOLantern"] % 10 == 0)
+					{
+						maximumSpookage();
+					}
 				}
 			}
 			if(item == "skellington")
@@ -319,11 +323,7 @@
 					items["skellingtons"] += 1;
 					if(items["skellingtons"] % 10 == 0)
 					{
-						document.getElementById("spookyBill").src = "spook.gif"
-						document.body.style.background = "#000000"
-						document.body.style.color = "#FFFFFF"
-						twoSpooky = true;
-						timer += 10;
+						maximumSpookage();
 					}
 					
 				}
@@ -334,11 +334,22 @@
 				{
 					spookieCount = spookieCount - itemsCost["spookySpiders"];
 					items["spookySpiders"] += 1;
+					if(items["spookySpiders"] % 10 == 0)
+					{
+						maximumSpookage();
+					}
 				}
 			}
 			gameUpdate();
 		}
-		
+		function maximumSpookage()
+		{
+			document.getElementById("spookyBill").src = "spook.gif"
+			document.body.style.background = "#000000"
+			document.body.style.color = "#FFFFFF"
+			twoSpooky = true;
+			timer += 10;
+		}
 		function gameLoop()
 		{
 			if(twoSpooky)
