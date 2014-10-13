@@ -85,7 +85,7 @@
 	#spookyShop
 	{
 		position: absolute;
-		top:0;
+		top:0px;
 		margin:50px;
 		padding: 10px;
 
@@ -236,7 +236,7 @@
 		function spookies(e)
 		{
 			//console.log(e)
-			ghosties.push(new ghostie(e.x, e.y,ghostiesId))
+			ghosties.push(new ghostie(e.clientX, e.clientY,ghostiesId))
 			if(!twoSpooky)
 			{
 				spookieCount += 1 * multiplier;
@@ -264,8 +264,8 @@
 
 			this.element = document.body.appendChild(this.element);
 			this.element.style.position = "absolute";
-			this.element.style.left = this.x+"px";
-			this.element.style.top = this.y+"px";
+			this.element.style.left = this.x + "px";
+			this.element.style.top = this.y + "px";
 			this.element.addEventListener("click", spookies);
 			this.element.ondragstart = function() { return false; };
 
@@ -273,7 +273,7 @@
 			{
 
 				this.y -= 0.5;
-				this.element.style.top= this.y+"px";
+				this.element.style.top= this.y + "px";
 
 			}
 		}
