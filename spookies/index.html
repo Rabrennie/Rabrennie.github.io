@@ -66,7 +66,7 @@
     	font-size: 30px;
     }
 	
-	#spookiesPerSecond, #spookiesPerClick
+	#spookiesPerSecond, #spookiesPerClick, #totalSpookies
     {
 		padding:0;
 		margin:0;
@@ -136,6 +136,8 @@
 	<br />
 	
 	<div id="spookiesPerClick">1 Spookies Per Click</div>
+	<br>
+	<div id="totalSpookies">0 Total Spookies</div>
 	</div>
 	<br />
 
@@ -223,6 +225,7 @@
 			items["jackOLantern"] = 0
 			
 			spookieCount = 0;
+			totalSpookies = 0;
 
 			gameLoop();
 
@@ -231,6 +234,7 @@
 			items["jackOLantern"] = 0
 			
 			spookieCount = 0;
+			totalSpookies = 0;
 		}
 
 		function spookies(e)
@@ -240,11 +244,13 @@
 			if(!twoSpooky)
 			{
 				spookieCount += 1 * multiplier;
+				totalSpookies += 1 * multiplier;
 				//console.log("spooky");
 			}
 			else
 			{
 				spookieCount +=1 * multiplier * 2;
+				totalSpookies += 1 * multiplier * 2;
 			}
 					
 		}
@@ -283,7 +289,8 @@
 			localStorage.setItem("spookieCount", spookieCount);
 			localStorage.setItem("skellingtons", items["skellingtons"]);
 			localStorage.setItem("spookySpiders", items["spookySpiders"]);
-			localStorage.setItem("jackOLantern", items["jackOLantern"]);	
+			localStorage.setItem("jackOLantern", items["jackOLantern"]);
+			localStorage.setItem("totalSpookies", totalSpookies);	
 		}
 		
 		function load()
@@ -292,6 +299,7 @@
 			items["skellingtons"] = parseInt(localStorage.getItem("skellingtons"));
 			items["spookySpiders"] = parseInt(localStorage.getItem("spookySpiders"));
 			items["jackOLantern"] = parseInt(localStorage.getItem("jackOLantern"));
+			totalSpookies = parseInt(localStorage.getItem("totalSpookies"));
 
 			
 			if(isNaN(spookieCount))
@@ -305,6 +313,11 @@
 				{
 					items[item] = 0
 				}
+			}
+
+			if(isNaN(totalSpookies))
+			{
+				totalSpookies = spookieCount;
 			}
 			gameUpdate();
 		}
@@ -362,6 +375,7 @@
 				}
 			}
 			spookieCount += sps;
+			totalSpookies += sps;
 			gameUpdate();
 		}
 		
@@ -380,6 +394,8 @@
 			document.getElementById("jackOLanternNumbers").innerHTML = items["jackOLantern"] + " Jack O'Lanterns";
 			document.getElementById("skellingtonNumbers").innerHTML = items["skellingtons"] + " Skellingtons";
 			document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"] + " Spooky Spiders";
+
+			document.getElementById("totalSpookies").innerHTML = totalSpookies + " Total Spookies";
 
 			for (var i = ghosties.length - 1; i >= 0; i--) {
 				if (ghosties[i] != undefined)
