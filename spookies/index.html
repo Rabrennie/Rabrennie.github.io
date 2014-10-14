@@ -111,7 +111,7 @@
 /*		border-left:solid 1px black;
 		border-right:solid 1px black;
 		border-bottom:solid 1px black;*/
-		top:150px;
+		top:170px;
 		position: absolute;
 	}
 
@@ -164,19 +164,23 @@
 		<div id="jackOLanternNumbers">0 Jack O'Lanterns</div>
 		<div id="skellingtonNumbers">0 Skellingtons</div>
 		<div id="spookySpiderNumbers">0 Spooky Spiders</div>
+		<div id="spookyEctoplasmNumbers">0 litres of Ectoplasm</div>
 	</div>
 	<br />
 	
 	<div id="spookyShop">
 		<div id="shopTitle"><h3>Spooky Shop</h3></div>
 		<div id="jackOLanternShop">
-			Buy a Jack O'Lantern for 100 Spookies
+			Buy a Jack O'Lantern for 20 Spookies
 		</div>
 		<div id="skellingtonShop">
-			Buy a Skellington for 500 Spookies
+			Buy a Skellington for 50 Spookies
 		</div>
 		<div id="spookySpiderShop">
-			Buy a Spooky Spider for 700 Spookies
+			Buy a Spooky Spider for 100 Spookies
+		</div>
+		<div id="spookyEctoplasmShop">
+			Buy 1 litre of Ectoplasm for 500 Spookies
 		</div>
 	</div>
 	<br />
@@ -192,9 +196,10 @@
 			totalSpookies,
 			items = {},
 			itemsCost = {
-				jackOLantern : 100,
-				skellingtons : 500,
-				spookySpiders : 700
+				jackOLantern : 20,
+				skellingtons : 50,
+				spookySpiders : 100,
+				ectoplasm : 500
 			},
 			multiplier = 1,
 			sps = 0,
@@ -247,6 +252,7 @@
 			items["skellingtons"] = 0
 			items["spookySpiders"] = 0
 			items["jackOLantern"] = 0
+			items["ectoplasm"] = 0
 			
 			spookieCount = 0;
 			totalSpookies = 0;
@@ -256,6 +262,7 @@
 			items["skellingtons"] = 0
 			items["spookySpiders"] = 0
 			items["jackOLantern"] = 0
+			items["ectoplasm"] = 0
 			
 			spookieCount = 0;
 			totalSpookies = 0;
@@ -314,6 +321,7 @@
 			localStorage.setItem("skellingtons", items["skellingtons"]);
 			localStorage.setItem("spookySpiders", items["spookySpiders"]);
 			localStorage.setItem("jackOLantern", items["jackOLantern"]);
+			localStorage.setItem("ectoplasm", items["ectoplasm"]);
 			localStorage.setItem("totalSpookies", totalSpookies);
 			localStorage.setItem("time", time);		
 		}
@@ -324,6 +332,7 @@
 			items["skellingtons"] = parseInt(localStorage.getItem("skellingtons"));
 			items["spookySpiders"] = parseInt(localStorage.getItem("spookySpiders"));
 			items["jackOLantern"] = parseInt(localStorage.getItem("jackOLantern"));
+			items["ectoplasm"] = parseInt(localStorage.getItem("ectoplasm"));
 			totalSpookies = parseInt(localStorage.getItem("totalSpookies"));
 			time = parseInt(localStorage.getItem("time"));
 
@@ -458,10 +467,12 @@
 			document.getElementById("jackOLanternShop").innerHTML = "Buy a Jack O'Lantern for " +itemsCost["jackOLantern"] + " Spookies";
 			document.getElementById("skellingtonShop").innerHTML = "Buy a Skellington for " +itemsCost["skellingtons"] + " Spookies";
 			document.getElementById("spookySpiderShop").innerHTML = "Buy a Spooky Spider for " +itemsCost["spookySpiders"] + " Spookies";
+			document.getElementById("spookyEctoplasmShop").innerHTML = "Buy 1 litre of Ectoplasm for " +itemsCost["ectoplasm"] + " Spookies";
 			
 			document.getElementById("jackOLanternNumbers").innerHTML = items["jackOLantern"] + " Jack O'Lanterns";
 			document.getElementById("skellingtonNumbers").innerHTML = items["skellingtons"] + " Skellingtons";
 			document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"] + " Spooky Spiders";
+			document.getElementById("spookyEctoplasmNumbers").innerHTML = items["ectoplasm"] + " litres of Ectoplasm";
 
 			document.getElementById("totalSpookies").innerHTML = prettyNumbers(totalSpookies) + " Total Spookies";
 			document.getElementById("time").innerHTML = prettyTime;
@@ -538,9 +549,10 @@
 			itemsCost["jackOLantern"] = 20 + Math.round(20 * Math.pow(items["jackOLantern"],1.09));
 			itemsCost["skellingtons"] = 50 + Math.round(50 * Math.pow(items["skellingtons"],1.09));
 			itemsCost["spookySpiders"] = 100 + Math.round(100 * Math.pow(items["spookySpiders"],1.09));
+			itemsCost["ectoplasm"] = 500 + Math.round(500 * Math.pow(items["ectoplasm"],1.09));
 			
-			sps = items["skellingtons"]*2 + items["spookySpiders"]*4;
-			multiplier = 1 + (0.5*items["jackOLantern"]);
+			sps = items["skellingtons"]*2 + items["spookySpiders"]*4 + items["ectoplasm"]*10;
+			multiplier = 1 + (0.5*items["jackOLantern"])+(2*items["ectoplasm"]);
 		}
 		
 		window.addEventListener('load',function(){
@@ -548,6 +560,7 @@
 			document.getElementById("jackOLanternShop").addEventListener("click", function(){buy("jackOLantern");}, false);
 			document.getElementById("skellingtonShop").addEventListener("click", function(){buy("skellingtons");}, false);
 			document.getElementById("spookySpiderShop").addEventListener("click", function(){buy("spookySpiders");}, false);
+			document.getElementById("spookyEctoplasmShop").addEventListener("click", function(){buy("ectoplasm");}, false);
 			document.getElementById('spookyBill').ondragstart = function() { return false; };
 		});
 		
