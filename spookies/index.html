@@ -119,6 +119,17 @@
 		top:120px;
 		right:100px;
 	}
+	#time
+	{
+		position: absolute;
+		left: 50%;
+		top: 400px;
+		padding-left: 10px;
+		transform: translate(-50%, -50%);
+		width:200px;
+		text-align: center;
+		font-size: 20px;
+	}
 	</style>
 </head>
 
@@ -162,6 +173,8 @@
 		</div>
 	</div>
 	<br />
+
+	<div id="time">00:00</div>
 	
 	
 	<div id="ghostieDiv"></div>
@@ -179,8 +192,11 @@
 			sps = 0,
 			twoSpooky = false,
 			timer = 0,
-			ghosties = []
-			ghostiesId=0;
+			ghosties = [],
+			ghostiesId=0,
+			time=0,
+			prettyTime="00:00",
+			dayornight = "day";
 		
 		function prettyNumbers(n)
 		{
@@ -348,7 +364,10 @@
 			timer += 10;
 		}
 		function gameLoop()
-		{
+		{	
+			var stuff = dayNight();
+			prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
+			dayornight = stuff[0];
 			if(twoSpooky)
 			{
 				
@@ -374,8 +393,23 @@
 					document.body.style.color = "#000000";
 				}
 			}
-			spookieCount += sps;
-			totalSpookies += sps;
+			if (dayornight == "night")
+			{
+				document.body.style.background = "#000000";
+				document.body.style.color = "#FFFFFF";
+				document.getElementById("maximumSpookage").style.color= "#000000"
+				spookieCount += (sps*2);
+				totalSpookies += (sps*2);
+			}
+			else
+			{
+				document.body.style.background = "#FFFFFF";
+				document.body.style.color = "#000000";
+				document.getElementById("maximumSpookage").style.color= "#FFFFFF"
+				spookieCount += sps;
+				totalSpookies += sps;
+			};
+			
 			gameUpdate();
 		}
 		
@@ -384,7 +418,15 @@
 
 			
 			document.getElementById("spookies").innerHTML = prettyNumbers(spookieCount) + " Spookies";
-			document.getElementById("spookiesPerSecond").innerHTML = sps + " Spookies Per Second";
+			if (dayornight == "night")
+			{
+				document.getElementById("spookiesPerSecond").innerHTML = sps*2 + " Spookies Per Second";
+			}
+			else
+			{
+				document.getElementById("spookiesPerSecond").innerHTML = sps + " Spookies Per Second";
+			};
+			
 			document.getElementById("spookiesPerClick").innerHTML = multiplier + " Spookies Per Click";
 			
 			document.getElementById("jackOLanternShop").innerHTML = "Buy a Jack O'Lantern for " +itemsCost["jackOLantern"] + " Spookies";
@@ -396,6 +438,7 @@
 			document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"] + " Spooky Spiders";
 
 			document.getElementById("totalSpookies").innerHTML = prettyNumbers(totalSpookies) + " Total Spookies";
+			document.getElementById("time").innerHTML = prettyTime;
 
 			for (var i = ghosties.length - 1; i >= 0; i--) {
 				if (ghosties[i] != undefined)
@@ -414,7 +457,55 @@
 			
 			document.title = Math.round(spookieCount) + " Spookies"
 		}
-		
+		function dayNight()
+		{
+
+			time += 5;
+			var temp = time+"";
+			if (time >= 2400)
+			{
+				time =0;
+			};
+			if(temp.slice(-2) == 60)
+			{
+				time+=40;
+			}
+			if (time+600 <1000)
+			{
+				var currentTime = "0"+(time+600);
+			}
+			else if(time+600 > 2400)
+			{
+				if (((time-2400)+600)<100)
+				{
+					var currentTime = "00" + ((time-2400)+600);
+				}
+				else
+				{
+					var currentTime = "0" + ((time-2400)+600);
+				};
+
+			}
+			else
+			{
+				var currentTime = time+600+"";
+			}
+			if (time+600< 100)
+			{
+				var currentTime = "00"+(time+600);
+			}
+
+
+			
+			if (time < 1200)
+			{
+				return ["day", currentTime];
+			}
+			else if (time >= 1200)
+			{
+				return ["night", currentTime];
+			};
+		}
 		function gameUpdate()
 		{	
 
