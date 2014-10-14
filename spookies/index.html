@@ -306,7 +306,8 @@
 			localStorage.setItem("skellingtons", items["skellingtons"]);
 			localStorage.setItem("spookySpiders", items["spookySpiders"]);
 			localStorage.setItem("jackOLantern", items["jackOLantern"]);
-			localStorage.setItem("totalSpookies", totalSpookies);	
+			localStorage.setItem("totalSpookies", totalSpookies);
+			localStorage.setItem("time", time);		
 		}
 		
 		function load()
@@ -316,6 +317,7 @@
 			items["spookySpiders"] = parseInt(localStorage.getItem("spookySpiders"));
 			items["jackOLantern"] = parseInt(localStorage.getItem("jackOLantern"));
 			totalSpookies = parseInt(localStorage.getItem("totalSpookies"));
+			time = parseInt(localStorage.getItem("time"));
 
 			
 			if(isNaN(spookieCount))
@@ -334,6 +336,10 @@
 			if(isNaN(totalSpookies))
 			{
 				totalSpookies = spookieCount;
+			}
+			if(isNaN(time))
+			{
+				time = 0;
 			}
 			gameUpdate();
 		}
