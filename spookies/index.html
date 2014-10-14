@@ -189,16 +189,16 @@
 			var formats = 
 			[
 				'',
-				' million',
-				' billion',
-				' trillion',
-				' quadrillion',
-				' quintillion',
-				' sextillion',
-				' septillion',
-				' octillion',
-				' nonillion',
-				' decillion'
+				' Million',
+				' Billion',
+				' Trillion',
+				' Quadrillion',
+				' Quintillion',
+				' Sextillion',
+				' Septillion',
+				' Octillion',
+				' Nonillion',
+				' Decillion'
 			]
 
 			if(n >= 1000000 && isFinite(n))
@@ -395,7 +395,7 @@
 			document.getElementById("skellingtonNumbers").innerHTML = items["skellingtons"] + " Skellingtons";
 			document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"] + " Spooky Spiders";
 
-			document.getElementById("totalSpookies").innerHTML = totalSpookies + " Total Spookies";
+			document.getElementById("totalSpookies").innerHTML = prettyNumbers(totalSpookies) + " Total Spookies";
 
 			for (var i = ghosties.length - 1; i >= 0; i--) {
 				if (ghosties[i] != undefined)
