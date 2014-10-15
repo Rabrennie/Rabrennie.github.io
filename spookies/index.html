@@ -147,40 +147,40 @@
 	
 	<div id="maximumSpookage"><h1>MAXIMUM SPOOKAGE</h1><br/></div>
 	<div id="container">
-	<div id="spookies">0 Spookies</div>
+	<div id="spookies"><span id="spookiesCount"></span> Spookies</div>
 	<br />
 	
-	<div id="spookiesPerSecond">0 Spookies Per Second</div>
+	<div id="spookiesPerSecond"><span id="spookiesPerSecondCount"></span> Spookies Per Second</div>
 	<br />
 	
-	<div id="spookiesPerClick">1 Spookies Per Click</div>
+	<div id="spookiesPerClick"><span id="spookiesPerClickCount"></span> Spookies Per Click</div>
 	<br>
-	<div id="totalSpookies">0 Total Spookies</div>
+	<div id="totalSpookies"><span id="totalSpookiesCount"></span> Total Spookies</div>
 	</div>
 	<br />
 
 	<div id="itemNumbers">
 		<h3>You Own:</h3>
-		<div id="jackOLanternNumbers">0 Jack O'Lanterns</div>
-		<div id="skellingtonNumbers">0 Skellingtons</div>
-		<div id="spookySpiderNumbers">0 Spooky Spiders</div>
-		<div id="spookyEctoplasmNumbers">0 litres of Ectoplasm</div>
+		<div><span id="jackOLanternNumbers"></span> Jack O'Lanterns</div>
+		<div><span id="skellingtonNumbers"></span> Skellingtons</div>
+		<div><span id="spookySpiderNumbers"></span> Spooky Spiders</div>
+		<div><span id="spookyEctoplasmNumbers"></span> litres of Ectoplasm</div>
 	</div>
 	<br />
 	
 	<div id="spookyShop">
 		<div id="shopTitle"><h3>Spooky Shop</h3></div>
 		<div id="jackOLanternShop">
-			Buy a Jack O'Lantern for 20 Spookies
+			Buy a Jack O'Lantern for <span id="jackOLanternCost">20</span> Spookies
 		</div>
 		<div id="skellingtonShop">
-			Buy a Skellington for 50 Spookies
+			Buy a Skellington for <span id="skellingtonCost">50</span> Spookies
 		</div>
 		<div id="spookySpiderShop">
-			Buy a Spooky Spider for 100 Spookies
+			Buy a Spooky Spider for <span id="spookySpiderCost">100</span> Spookies
 		</div>
 		<div id="spookyEctoplasmShop">
-			Buy 1 litre of Ectoplasm for 500 Spookies
+			Buy 1 litre of Ectoplasm for <span id="spookyEctoplasmCost">500</span> Spookies
 		</div>
 	</div>
 	<br />
@@ -460,29 +460,36 @@
 		{
 
 			
-			document.getElementById("spookies").innerHTML = prettyNumbers(spookieCount) + " Spookies";
+			document.getElementById("spookiesCount").innerHTML = prettyNumbers(spookieCount);
 			if (dayornight == "night")
 			{
-				document.getElementById("spookiesPerSecond").innerHTML = sps*2 + " Spookies Per Second";
+				document.getElementById("spookiesPerSecondCount").innerHTML = sps*2;
 			}
 			else
 			{
-				document.getElementById("spookiesPerSecond").innerHTML = sps + " Spookies Per Second";
+				document.getElementById("spookiesPerSecondCount").innerHTML = sps;
 			};
+			if(twoSpooky)
+			{
+				document.getElementById("spookiesPerClickCount").innerHTML = multiplier*2;
+			}
+			else
+			{
+				document.getElementById("spookiesPerClickCount").innerHTML = multiplier;
+			}
 			
-			document.getElementById("spookiesPerClick").innerHTML = multiplier + " Spookies Per Click";
 			
-			document.getElementById("jackOLanternShop").innerHTML = "Buy a Jack O'Lantern for " +itemsCost["jackOLantern"] + " Spookies";
-			document.getElementById("skellingtonShop").innerHTML = "Buy a Skellington for " +itemsCost["skellingtons"] + " Spookies";
-			document.getElementById("spookySpiderShop").innerHTML = "Buy a Spooky Spider for " +itemsCost["spookySpiders"] + " Spookies";
-			document.getElementById("spookyEctoplasmShop").innerHTML = "Buy 1 litre of Ectoplasm for " +itemsCost["ectoplasm"] + " Spookies";
+			document.getElementById("jackOLanternCost").innerHTML = itemsCost["jackOLantern"];
+			document.getElementById("skellingtonCost").innerHTML = itemsCost["skellingtons"];
+			document.getElementById("spookySpiderCost").innerHTML = itemsCost["spookySpiders"];
+			document.getElementById("spookyEctoplasmCost").innerHTML = itemsCost["ectoplasm"];
 			
-			document.getElementById("jackOLanternNumbers").innerHTML = items["jackOLantern"] + " Jack O'Lanterns";
-			document.getElementById("skellingtonNumbers").innerHTML = items["skellingtons"] + " Skellingtons";
-			document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"] + " Spooky Spiders";
-			document.getElementById("spookyEctoplasmNumbers").innerHTML = items["ectoplasm"] + " litres of Ectoplasm";
+			document.getElementById("jackOLanternNumbers").innerHTML = items["jackOLantern"];
+			document.getElementById("skellingtonNumbers").innerHTML = items["skellingtons"];
+			document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"];
+			document.getElementById("spookyEctoplasmNumbers").innerHTML = items["ectoplasm"];
 
-			document.getElementById("totalSpookies").innerHTML = prettyNumbers(totalSpookies) + " Total Spookies";
+			document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
 			document.getElementById("time").innerHTML = prettyTime;
 
 			for (var i = ghosties.length - 1; i >= 0; i--) {
