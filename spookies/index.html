@@ -55,6 +55,7 @@
  		border-radius: 300px; 
  		margin-left: 50px;
  		margin-top: 50px;
+ 		cursor: pointer;
 
 	}
 
@@ -94,6 +95,7 @@
 
 		text-align: center;
 		width:350px;
+		cursor: pointer;
 	}
 
 	.ghosties
@@ -101,6 +103,7 @@
 		position:absolute;
 		margin:0;
 		padding:0;
+
 	}
 
 	#itemNumbers
@@ -111,8 +114,9 @@
 /*		border-left:solid 1px black;
 		border-right:solid 1px black;
 		border-bottom:solid 1px black;*/
-		top:170px;
+		top:180px;
 		position: absolute;
+
 	}
 
 	#container
@@ -136,6 +140,86 @@
 	#version
 	{
 		padding: 10px;
+	}
+	#settingsButton
+	{
+		position: fixed;
+		top:10px;
+		right:30px;
+		cursor: pointer;
+	}
+	#settings
+	{
+		
+		position: fixed;
+
+		top: 100px;
+		left: 50%;
+		margin-left: -250px;
+		padding: 0;
+		background-color: white;
+		color: black;
+		width:500px;
+		height:50px;
+		border: solid 1px black;
+		visibility: hidden;
+		z-index: 100000000000;
+	}
+	#settings span
+	{
+		line-height: 50px; 
+		vertical-align: middle; 
+		margin: 0 60px;
+		cursor: pointer;
+	}
+	#cover
+	{
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		visibility: hidden;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 10000000000;
+		margin: 0;
+		padding: 0;
+	}
+	#cross
+	{
+		position: fixed;
+		top:95px;
+		left: 50%;
+		margin-left: 240px;
+		width:10px;
+		cursor: pointer;
+
+	}
+	#helpPopup
+	{
+		
+		position: fixed;
+
+		top: 150px;
+		left: 50%;
+		margin-left: -250px;
+		padding: 0;
+		background-color: white;
+		color: black;
+		width:500px;
+		height:250px;
+		border: solid 1px black;
+		visibility: hidden;
+		z-index: 100000000000;
+	}
+	#helpText
+	{
+		padding: 10px 60px;
+		text-align: center;
+	}
+	#helpText p
+	{
+		text-align: left;
 	}
 	</style>
 </head>
@@ -162,9 +246,10 @@
 	<div id="itemNumbers">
 		<h3>You Own:</h3>
 		<div><span id="jackOLanternNumbers"></span> Jack O'Lanterns</div>
-		<div><span id="skellingtonNumbers"></span> Skellingtons</div>
-		<div><span id="spookySpiderNumbers"></span> Spooky Spiders</div>
-		<div><span id="spookyEctoplasmNumbers"></span> litres of Ectoplasm</div>
+		<div><span id="skellingtonsNumbers"></span> Skellingtons</div>
+		<div><span id="spookySpidersNumbers"></span> Spooky Spiders</div>
+		<div><span id="ectoplasmNumbers"></span> litres of Ectoplasm</div>
+		<div><span id="hauntedHouseNumbers"></span> Haunted Houses</div>
 	</div>
 	<br />
 	
@@ -173,23 +258,45 @@
 		<div id="jackOLanternShop">
 			Buy a Jack O'Lantern for <span id="jackOLanternCost">20</span> Spookies
 		</div>
-		<div id="skellingtonShop">
-			Buy a Skellington for <span id="skellingtonCost">50</span> Spookies
+		<div id="skellingtonsShop">
+			Buy a Skellington for <span id="skellingtonsCost">50</span> Spookies
 		</div>
-		<div id="spookySpiderShop">
-			Buy a Spooky Spider for <span id="spookySpiderCost">100</span> Spookies
+		<div id="spookySpidersShop">
+			Buy a Spooky Spider for <span id="spookySpidersCost">100</span> Spookies
 		</div>
-		<div id="spookyEctoplasmShop">
-			Buy 1 litre of Ectoplasm for <span id="spookyEctoplasmCost">500</span> Spookies
+		<div id="ectoplasmShop">
+			Buy 1 litre of Ectoplasm for <span id="ectoplasmCost">500</span> Spookies
+		</div>
+		<div id="hauntedHouseShop">
+			Buy a Haunted House for <span id="hauntedHouseCost">100,000</span> Spookies
 		</div>
 	</div>
 	<br />
 
 	<div id="time">00:00</div>
 	
-	<div id="version">v0.03</div>
+	<div id="version">v0.4</div>
 	
 	<div id="ghostieDiv"></div>
+
+	<span id="settingsButton">Settings</span>
+	<div id="cover"></div>
+	<div id="settings">
+		<span id="save">Save</span>
+		<span id="reset">Reset</span>
+		<span id="help">Help</span>
+		<div id="cross">x</div>
+	</div>
+
+	<div id="helpPopup">
+		<div id="helpText">
+			<h2>Help</h2>
+			<p>&bull; Click the picture of Bill Murray to earn Spookies.</p>
+			<p>&bull; Use the Spookies you have earned to buy items from the spooky shop. These items will help you earn more spookies every click and second</p>
+			<p>&bull; That's all there is to the game :)</p>
+		</div>
+	</div>
+
 	
 	<script src="game.js"></script>
 </body>

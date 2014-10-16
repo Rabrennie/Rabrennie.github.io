@@ -6,7 +6,8 @@ var spookieCount,
 		jackOLantern : 20,
 		skellingtons : 50,
 		spookySpiders : 100,
-		ectoplasm : 500
+		ectoplasm : 500,
+		hauntedHouse : 100000
 	},
 	multiplier = 1,
 	sps = 0,
@@ -16,7 +17,8 @@ var spookieCount,
 	ghostiesId=0,
 	time=0,
 	prettyTime="00:00",
-	dayornight = "day";
+	dayornight = "day",
+	settingsOpen = false;
 
 function prettyNumbers(n)
 {
@@ -56,20 +58,22 @@ function prettyNumbers(n)
 function resetGame()
 {
 	
-	items["skellingtons"] = 0
-	items["spookySpiders"] = 0
-	items["jackOLantern"] = 0
-	items["ectoplasm"] = 0
+	items["skellingtons"] = 0;
+	items["spookySpiders"] = 0;
+	items["jackOLantern"] = 0;
+	items["ectoplasm"] = 0;
+	items["hauntedHouse"] = 0;
 	
 	spookieCount = 0;
 	totalSpookies = 0;
 
 	gameLoop();
 
-	items["skellingtons"] = 0
-	items["spookySpiders"] = 0
-	items["jackOLantern"] = 0
-	items["ectoplasm"] = 0
+	items["skellingtons"] = 0;
+	items["spookySpiders"] = 0;
+	items["jackOLantern"] = 0;
+	items["ectoplasm"] = 0;
+	items["hauntedHouse"] = 0;
 	
 	spookieCount = 0;
 	totalSpookies = 0;
@@ -110,6 +114,7 @@ function ghostie(x,y, id)
 	this.element.style.position = "absolute";
 	this.element.style.left = this.x + "px";
 	this.element.style.top = this.y + "px";
+	this.element.style.cursor = "pointer"
 	this.element.addEventListener("click", spookies);
 	this.element.ondragstart = function() { return false; };
 
@@ -129,6 +134,7 @@ function save()
 	localStorage.setItem("spookySpiders", items["spookySpiders"]);
 	localStorage.setItem("jackOLantern", items["jackOLantern"]);
 	localStorage.setItem("ectoplasm", items["ectoplasm"]);
+	localStorage.setItem("hauntedHouse", items["hauntedHouse"]);
 	localStorage.setItem("totalSpookies", totalSpookies);
 	localStorage.setItem("time", time);		
 }
@@ -140,6 +146,7 @@ function load()
 	items["spookySpiders"] = parseInt(localStorage.getItem("spookySpiders"));
 	items["jackOLantern"] = parseInt(localStorage.getItem("jackOLantern"));
 	items["ectoplasm"] = parseInt(localStorage.getItem("ectoplasm"));
+	items["hauntedHouse"] = parseInt(localStorage.getItem("hauntedHouse"));
 	totalSpookies = parseInt(localStorage.getItem("totalSpookies"));
 	time = parseInt(localStorage.getItem("time"));
 
@@ -259,7 +266,7 @@ function gameLoop()
 		document.body.style.background = "#0000000";
 		document.body.style.color = "#FFFFFF";
 	};
-	
+	document.title = Math.round(spookieCount) + " Spookies"
 	gameUpdate();
 }
 
@@ -285,19 +292,19 @@ function displayUpdate()
 		document.getElementById("spookiesPerClickCount").innerHTML = multiplier;
 	}
 	
-	
-	document.getElementById("jackOLanternCost").innerHTML = itemsCost["jackOLantern"];
-	document.getElementById("skellingtonCost").innerHTML = itemsCost["skellingtons"];
-	document.getElementById("spookySpiderCost").innerHTML = itemsCost["spookySpiders"];
-	document.getElementById("spookyEctoplasmCost").innerHTML = itemsCost["ectoplasm"];
-	
-	document.getElementById("jackOLanternNumbers").innerHTML = items["jackOLantern"];
-	document.getElementById("skellingtonNumbers").innerHTML = items["skellingtons"];
-	document.getElementById("spookySpiderNumbers").innerHTML = items["spookySpiders"];
-	document.getElementById("spookyEctoplasmNumbers").innerHTML = items["ectoplasm"];
-
 	document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
 	document.getElementById("time").innerHTML = prettyTime;
+
+	for(item in items)
+	{
+		var temp = item+"Cost";
+		document.getElementById(temp.trim()).innerHTML = itemsCost[item];
+	}
+	for(item in items)
+	{
+		var temp = item+"Numbers";
+		document.getElementById(temp.trim()).innerHTML = items[item];
+	}
 
 	for (var i = ghosties.length - 1; i >= 0; i--) {
 		if (ghosties[i] != undefined)
@@ -365,6 +372,37 @@ function dayNight()
 		return ["night", currentTime];
 	};
 }
+function settings (e) 
+{
+	if (e=="help")
+	{
+		document.getElementById("helpPopup").style.visibility ="visible";
+	}
+	else if(e=="save")
+	{
+		save();
+	}
+	else if (e=="reset")
+	{
+		if (window.confirm("Are you sure you want to reset your game?"))
+		{
+			resetGame();
+		}
+	};
+	if(settingsOpen==true && e!="help")
+	{
+		document.getElementById("cover").style.visibility ="hidden";
+		document.getElementById("settings").style.visibility ="hidden";
+		document.getElementById("helpPopup").style.visibility ="hidden";
+		settingsOpen = false;
+	}
+	else if (settingsOpen==false)
+	{
+		document.getElementById("cover").style.visibility ="visible";
+		document.getElementById("settings").style.visibility ="visible";
+		settingsOpen = true;
+	};
+}
 function gameUpdate()
 {	
 
@@ -372,18 +410,27 @@ function gameUpdate()
 	itemsCost["skellingtons"] = 50 + Math.round(50 * Math.pow(items["skellingtons"],1.09));
 	itemsCost["spookySpiders"] = 100 + Math.round(100 * Math.pow(items["spookySpiders"],1.09));
 	itemsCost["ectoplasm"] = 500 + Math.round(500 * Math.pow(items["ectoplasm"],1.09));
+	itemsCost["hauntedHouse"] = 100000 + Math.round(100000 * Math.pow(items["hauntedHouse"],1.09));
+
 	
-	sps = items["skellingtons"]*2 + items["spookySpiders"]*4 + items["ectoplasm"]*10;
-	multiplier = 1 + (0.5*items["jackOLantern"])+(2*items["ectoplasm"]);
+	sps = items["skellingtons"]*2 + items["spookySpiders"]*4 + items["ectoplasm"]*10 + items["hauntedHouse"]*100;
+	multiplier = 1 + (0.5*items["jackOLantern"])+(2*items["ectoplasm"]) + (10*items["hauntedHouse"]);
 }
 
 window.addEventListener('load',function(){
+	for(item in items)
+	{
+	var temp = item+"Shop"
+	document.getElementById(temp).addEventListener("click", function(){buy(item);}, false);
+	}
 	document.getElementById("spookyBill").addEventListener("click", spookies);
-	document.getElementById("jackOLanternShop").addEventListener("click", function(){buy("jackOLantern");}, false);
-	document.getElementById("skellingtonShop").addEventListener("click", function(){buy("skellingtons");}, false);
-	document.getElementById("spookySpiderShop").addEventListener("click", function(){buy("spookySpiders");}, false);
-	document.getElementById("spookyEctoplasmShop").addEventListener("click", function(){buy("ectoplasm");}, false);
-	document.getElementById('spookyBill').ondragstart = function() { return false; };
+	document.getElementById("settingsButton").addEventListener("click", function(){settings()}, false);
+	document.getElementById("cover").addEventListener("click", function(){settings();}, false);
+	document.getElementById("reset").addEventListener("click", function(){settings("reset")}, false);
+	document.getElementById("cross").addEventListener("click", function(){settings();}, false);
+	document.getElementById("save").addEventListener("click", function(){settings("save");}, false);
+	document.getElementById("help").addEventListener("click", function(){settings("help");}, false);
+	document.getElementById('spookyBill').ondragstart = function() { return false;spookies(); };
 });
 
 
