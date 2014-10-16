@@ -419,7 +419,7 @@ function gameUpdate()
 
 	
 	sps = items["skellingtons"]*2 + items["spookySpiders"]*4 + items["ectoplasm"]*10 + items["hauntedHouse"]*100;
-	multiplier = 1 + (0.5*items["jackOLantern"])+(2*items["ectoplasm"]) + (10*items["hauntedHouse"]);
+	multiplier = 1 + (0.5*items["jackOLantern"])+(2*items["ectoplasm"]) + (20*items["hauntedHouse"]);
 }
 
 window.addEventListener('load',function(){
