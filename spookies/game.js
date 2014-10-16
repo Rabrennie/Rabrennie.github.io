@@ -418,11 +418,11 @@ function gameUpdate()
 }
 
 window.addEventListener('load',function(){
-	for(item in items)
-	{
-	var temp = item+"Shop"
-	document.getElementById(temp).addEventListener("click", function(){buy(item);}, false);
-	}
+	document.getElementById("jackOLanternShop").addEventListener("click", function(){buy("jackOLantern");}, false);
+	document.getElementById("skellingtonsShop").addEventListener("click", function(){buy("skellingtons");}, false);
+	document.getElementById("spookySpidersShop").addEventListener("click", function(){buy("spookySpiders");}, false);
+	document.getElementById("ectoplasmShop").addEventListener("click", function(){buy("ectoplasm");}, false);
+	document.getElementById("hauntedHouseShop").addEventListener("click", function(){buy("hauntedHouse");}, false);
 	document.getElementById("spookyBill").addEventListener("click", spookies);
 	document.getElementById("settingsButton").addEventListener("click", function(){settings()}, false);
 	document.getElementById("cover").addEventListener("click", function(){settings();}, false);
