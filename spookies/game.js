@@ -205,6 +205,11 @@ function gameLoop()
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
 	dayornight = stuff[0];
+
+	if (time%600)
+	{
+		save();
+	};
 	if(twoSpooky)
 	{
 		
