@@ -1,4 +1,4 @@
-
+(function() {
 var spookieCount,
 	totalSpookies,
 	items = {},
@@ -26,7 +26,18 @@ var spookieCount,
 	messageOpacity = 0;
 
 
+	//"name": new ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt),
+var achievements =
+{
+	"2 Spooky": new ach(0, "2 Spooky", "Earn at least two Spookies",2,0,0,0,0,0,0,0),
 
+	"13 lumens": new ach(1, "13 lumens","Own at least one Jack O'Lantern",0,0,0,1,0,0,0,0),
+
+	"Auto Spook": new ach(2,"Auto Spook","Have at least one Spookie per second",0,1,0,0,0,0,0,0),
+
+	"Way 2 Spooky": new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2)
+
+}
 	
 
 function prettyNumbers(n)
@@ -102,26 +113,43 @@ function messageHandler()
 	};
 	
 }
+function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
+{
+	this.id=id;
+	this.name = name;
+	this.got=false;
+	this.desc = desc;
+	this.get = function()
+	{
+		achieved[name] = {"id":id,"name":name,"desc":desc}
+		this.got=true;
+		messages.unshift('Achievement earned: "'+ this.name +'"')
+	};
+
+	this.check = function()
+	{
+		if (achieved[this.name] != null)
+		{
+			this.got=true;
+		}
+		else if (totalSpookies>=total && sps >= persec && multiplier >= perclick && items["jackOLantern"]>=jol && items["skellingtons"]>= skelly && items["spookySpiders"]>=spider && items["ectoplasm"] >= ecto && items["hauntedHouse"]>= haunt)
+		{
+			this.get()
+		};
+	};
+}
+
 function resetGame()
 {
 	
-	items["skellingtons"] = 0;
-	items["spookySpiders"] = 0;
-	items["jackOLantern"] = 0;
-	items["ectoplasm"] = 0;
-	items["hauntedHouse"] = 0;
+	for(name in items)
+	{
+		items[name] = 0;
+	};
 	achieved = {};
-	
-	spookieCount = 0;
-	totalSpookies = 0;
 
 	gameLoop();
 
-	items["skellingtons"] = 0;
-	items["spookySpiders"] = 0;
-	items["jackOLantern"] = 0;
-	items["ectoplasm"] = 0;
-	items["hauntedHouse"] = 0;
 	achieved = {};
 	for (name in achievements) {
 		achievements[name].got = false;
@@ -137,17 +165,9 @@ function spookies(e)
 {
 	//console.log(e)
 	ghosties.push(new ghostie(e.clientX, e.clientY,ghostiesId))
-	if(!twoSpooky)
-	{
-		spookieCount += 1 * multiplier;
-		totalSpookies += 1 * multiplier;
-		//console.log("spooky");
-	}
-	else
-	{
-		spookieCount +=1 * multiplier * 2;
-		totalSpookies += 1 * multiplier * 2;
-	}
+	var extraMultiplier = twoSpooky ? 2:1;
+	spookieCount +=1 * multiplier * extraMultiplier;
+	totalSpookies += 1 * multiplier * extraMultiplier;
 			
 }
 
@@ -398,8 +418,12 @@ function displayUpdate()
 	{
 		var a = achieved[name];
 
-		temp += "<div><h3>"+name+"</h3><p>"+a.desc+"</p></div>"
+		temp += "<div><h3>"+name+"</h3><p>"+a.desc+"</p></div>";
 	}
+	if (temp == "")
+	{
+		temp = "<div><h3>No achievements yet :(</div></h3>";
+	};
 	document.getElementById("achieved").innerHTML= temp;
 	requestAnimationFrame(displayUpdate);
 	
@@ -517,6 +541,7 @@ function gameUpdate()
 }
 
 window.addEventListener('load',function(){
+	load();
 	document.getElementById("jackOLanternShop").addEventListener("click", function(){buy("jackOLantern");}, false);
 	document.getElementById("skellingtonsShop").addEventListener("click", function(){buy("skellingtons");}, false);
 	document.getElementById("spookySpidersShop").addEventListener("click", function(){buy("spookySpiders");}, false);
@@ -533,11 +558,11 @@ window.addEventListener('load',function(){
 	document.getElementById("help").addEventListener("click", function(){settings("help");}, false);
 	document.getElementById('spookyBill').ondragstart = function() { return false;spookies(); };
 });
-
+window.addEventListener('unload',function(){save();});
 
 var timer = window.setInterval(function(){gameLoop();}, 1000);
 
 requestAnimationFrame(displayUpdate);
-
+})()
 	
 	
