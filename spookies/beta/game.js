@@ -35,7 +35,9 @@ var achievements =
 
 	"Auto Spook": new ach(2,"Auto Spook","Have at least one Spookie per second",0,1,0,0,0,0,0,0),
 
-	"Way 2 Spooky": new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2)
+	"Way 2 Spooky": new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2),
+
+	"Who you gonna call?": new ach(4,"Who you gonna call?","Own at least 1 litre of ectoplasm",0,0,0,0,0,0,1,0)
 
 }
 	
