@@ -37,7 +37,9 @@ var achievements =
 
 	"Way 2 Spooky": new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2),
 
-	"Who you gonna call?": new ach(4,"Who you gonna call?","Own at least 1 litre of ectoplasm",0,0,0,0,0,0,1,0)
+	"Who you gonna call?": new ach(4,"Who you gonna call?","Own at least one litre of ectoplasm",0,0,0,0,0,0,1,0),
+
+	"Spooky Scary Skeletons": new ach(5,"Spooky Scary Skeletons","Own at least one Skellington",0,0,0,0,1,0,0,0)
 
 }
 	
