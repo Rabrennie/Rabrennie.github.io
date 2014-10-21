@@ -374,7 +374,7 @@ function displayUpdate()
 
 	
 	document.getElementById("spookiesCount").innerHTML = prettyNumbers(spookieCount);
-	document.getElementById("spookiesCount").title=Math.floor(spookieCount)
+	document.getElementById("spookiesCount").title=Math.floor(spookieCount) + " Spookies"
 	if (dayornight == "night")
 	{
 		document.getElementById("spookiesPerSecondCount").innerHTML = sps*2;
@@ -393,6 +393,7 @@ function displayUpdate()
 	}
 	
 	document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
+	document.getElementById("totalSpookiesCount").title=Math.floor(spookieCount) + " Spookies"
 	document.getElementById("time").innerHTML = prettyTime;
 
 	for(item in items)
