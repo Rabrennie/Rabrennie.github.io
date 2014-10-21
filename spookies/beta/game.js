@@ -33,7 +33,7 @@ var achievements =
 
 	"13 lumens": new ach(1, "13 lumens","Own at least one Jack O'Lantern",0,0,0,1,0,0,0,0),
 
-	"Auto Spook": new ach(2,"Auto Spook","Have at least one Spookie per second",0,1,0,0,0,0,0,0),
+	"Auto Spook": new ach(2,"Auto Spook","Have at least ten Spookies per second",0,10,0,0,0,0,0,0),
 
 	"Way 2 Spooky": new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2),
 
