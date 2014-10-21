@@ -393,7 +393,7 @@ function displayUpdate()
 	}
 	
 	document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
-	document.getElementById("totalSpookiesCount").title=Math.floor(spookieCount) + " Spookies"
+	document.getElementById("totalSpookiesCount").title=Math.floor(totalSpookies) + " Spookies"
 	document.getElementById("time").innerHTML = prettyTime;
 
 	for(item in items)
