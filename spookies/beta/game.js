@@ -374,6 +374,7 @@ function displayUpdate()
 
 	
 	document.getElementById("spookiesCount").innerHTML = prettyNumbers(spookieCount);
+	document.getElementById("spookiesCount").title=Math.floor(spookieCount)
 	if (dayornight == "night")
 	{
 		document.getElementById("spookiesPerSecondCount").innerHTML = sps*2;
