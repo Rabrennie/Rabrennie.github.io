@@ -443,6 +443,11 @@ function displayUpdate()
 	{
 		var temp = item+"Cost";
 		document.getElementById(temp.trim()).innerHTML = prettyNumbers(itemsCost[item]);
+
+		if (itemsCost[item] > 1000000)
+		{
+			document.getElementById(temp.trim()).title = itemsCost[item];
+		};
 	}
 	for(item in items)
 	{
