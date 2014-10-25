@@ -287,7 +287,7 @@ function load()
 	{
 		time = 0;
 	}
-	if (achieved == null)
+	if (achieved == null || achieved.constructor != "Array")
 	{
 		achieved = [];
 	};
@@ -327,7 +327,7 @@ function maximumSpookage()
 }
 function gameLoop()
 {	
-	console.log(ghosties)
+
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
 	dayornight = stuff[0];

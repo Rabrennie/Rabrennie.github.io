@@ -287,7 +287,7 @@ function load()
 	{
 		time = 0;
 	}
-	if (achieved == null)
+	if (achieved == null || achieved.constructor != "Array")
 	{
 		achieved = [];
 	};
