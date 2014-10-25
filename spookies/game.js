@@ -287,7 +287,7 @@ function load()
 	{
 		time = 0;
 	}
-	if (achieved == null || achieved.constructor != "Array")
+	if (achieved == null)
 	{
 		achieved = [];
 	};
@@ -330,7 +330,7 @@ function gameLoop()
 
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
-	
+
 	dayornight = stuff[0];
 	if (time%600==0)
 	{
