@@ -1,4 +1,4 @@
-
+(function() {
 var spookieCount,
 	totalSpookies,
 	items = {},
@@ -18,8 +18,48 @@ var spookieCount,
 	time=0,
 	prettyTime="00:00",
 	dayornight = "day",
-	settingsOpen = false;
+	settingsOpen = false,
+	achievesOpen = false,
+	achieved = [],
+	messages = [],
+	messageTimer =0,
+	messageOpacity = 0;
 
+
+	//id: new ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt),
+var achievements =
+{
+	0: new ach(0, "A Little 2 Spooky", "Earn at least 2 Total Spookies",2,0,0,0,0,0,0,0),
+
+	1: new ach(1, "13 lumens","Own at least 1 Jack O'Lantern",0,0,0,1,0,0,0,0),
+
+	2: new ach(2,"Auto Spook","Gain at least 10 Spookies per second",0,10,0,0,0,0,0,0),
+
+	3: new ach(3,"Slightly 2 Spooky","Own at least 2 of every item",0,0,0,2,2,2,2,2),
+
+	4: new ach(4,"\"I've been slimed\"","Own at least 1 litre of ectoplasm",0,0,0,0,0,0,1,0),
+
+	5: new ach(5,"Spooky Scary Skeletons","Own at least 1 Skellington",0,0,0,0,1,0,0,0),
+
+	6: new ach(6,"4 Many Legs 6 Me","Own at least 1 Spooky Spider",0,0,0,0,0,1,0,0),
+
+	7: new ach(7,"Creeky Floorboards","Own at least 1 Haunted House",0,0,0,0,0,0,0,1),
+
+	8: new ach(8,"Nearly 2 Spooky","Have at least 2000 Total Spookies",2000,0,0,0,0,0,0,0),
+
+	9: new ach(9,"2 Spooky 4 Me","Have at least 2,000,000 Total Spookies",2000000,0,0,0,0,0,0,0),
+
+	10: new ach(10,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0)
+
+
+
+
+}
+	
+function devSpookies()
+{
+	spookieCount += 10000000000000;
+}
 function prettyNumbers(n)
 {
 	//stolen from cookie clicker #NoShame
@@ -55,45 +95,105 @@ function prettyNumbers(n)
 		return Math.floor(n);
 	}
 }
+function messageHandler()
+{
+	var white = ((dayornight=="day")? ((twoSpooky)? true:false):true)
+	if (!white)
+	{
+		rgbvalue = "rgba(0,0,0,"+messageOpacity+")";
+	}
+	else
+	{
+		rgbvalue = "rgba(255,255,255,"+messageOpacity+")";
+	};
+	if (messages[0] != undefined)
+	{
+		document.getElementById("message").style.color= rgbvalue;
+		document.getElementById("message").innerHTML = messages[0];
+		messageTimer+=1;
+		if (messageOpacity<1 && messageTimer<=100)
+		{
+			messageOpacity+= 0.03;
+		}
+		else if (messageOpacity>0 && messageTimer>100)
+		{
+			messageOpacity-= 0.03;
+		};
+		
+
+		if (messageTimer%200 == 0)
+		{
+			document.getElementById("message").innerHTML = messages.shift()
+			messageTimer = 0;
+			messageOpacity= 0;
+		};
+	}
+	else
+	{
+		document.getElementById("message").innerHTML = ""
+	};
+	
+}
+function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
+{
+	this.id=id;
+	this.name = name;
+	this.got=false;
+	this.desc = desc;
+	this.get = function()
+	{
+		achieved.push(this.id)
+		this.got=true;
+		messages.push('Achievement earned: "'+ this.name +'"')
+	};
+
+	this.check = function()
+	{
+		if (achieved.indexOf(this.id) != -1)
+		{
+			this.got=true;
+		}
+		else if (totalSpookies>=total && sps >= persec && multiplier >= perclick && items["jackOLantern"]>=jol && items["skellingtons"]>= skelly && items["spookySpiders"]>=spider && items["ectoplasm"] >= ecto && items["hauntedHouse"]>= haunt)
+		{
+			this.get()
+		};
+	};
+}
+
 function resetGame()
 {
 	
-	items["skellingtons"] = 0;
-	items["spookySpiders"] = 0;
-	items["jackOLantern"] = 0;
-	items["ectoplasm"] = 0;
-	items["hauntedHouse"] = 0;
-	
-	spookieCount = 0;
-	totalSpookies = 0;
+	for(name in items)
+	{
+		items[name] = 0;
+	};
+	achieved = [];
 
 	gameLoop();
 
-	items["skellingtons"] = 0;
-	items["spookySpiders"] = 0;
-	items["jackOLantern"] = 0;
-	items["ectoplasm"] = 0;
-	items["hauntedHouse"] = 0;
+	achieved = [];
+	for (name in achievements) {
+		achievements[name].got = false;
+	};
+
+
+	twoSpooky = false;
+	timer = 0;
 	
 	spookieCount = 0;
 	totalSpookies = 0;
+	time=0;
+
+	messages.push("Game Reset")
 }
 
 function spookies(e)
 {
 	//console.log(e)
 	ghosties.push(new ghostie(e.clientX, e.clientY,ghostiesId))
-	if(!twoSpooky)
-	{
-		spookieCount += 1 * multiplier;
-		totalSpookies += 1 * multiplier;
-		//console.log("spooky");
-	}
-	else
-	{
-		spookieCount +=1 * multiplier * 2;
-		totalSpookies += 1 * multiplier * 2;
-	}
+	var extraMultiplier = twoSpooky ? 2:1;
+	spookieCount +=1 * multiplier * extraMultiplier;
+	totalSpookies += 1 * multiplier * extraMultiplier;
 			
 }
 
@@ -136,7 +236,9 @@ function save()
 	localStorage.setItem("ectoplasm", items["ectoplasm"]);
 	localStorage.setItem("hauntedHouse", items["hauntedHouse"]);
 	localStorage.setItem("totalSpookies", totalSpookies);
-	localStorage.setItem("time", time);		
+	localStorage.setItem("achieved", JSON.stringify(achieved))
+	localStorage.setItem("time", time);
+	messages.push("Game Saved")
 }
 
 function load()
@@ -148,9 +250,9 @@ function load()
 	items["ectoplasm"] = parseInt(localStorage.getItem("ectoplasm"));
 	items["hauntedHouse"] = parseInt(localStorage.getItem("hauntedHouse"));
 	totalSpookies = parseInt(localStorage.getItem("totalSpookies"));
+	achieved = JSON.parse(window.localStorage.getItem("achieved"));
 	time = parseInt(localStorage.getItem("time"));
 
-	
 	if(isNaN(spookieCount))
 	{
 		spookieCount = 0;
@@ -172,22 +274,32 @@ function load()
 	{
 		time = 0;
 	}
+	if (achieved == null)
+	{
+		achieved = [];
+	};
 	gameUpdate();
 }
 
-function buy(item)
+function buy(item, ten, hundred)
 {
 	if( item != null && item != undefined)
 	{
-		if(spookieCount >= itemsCost[item])
-		{
-			spookieCount = spookieCount - itemsCost[item];
-			items[item] += 1;
-			if(items[item] % 10 == 0)
+		var n = (ten ? 10:hundred ? 100: 1)
+		for (var i = 0; i < n; i++) {
+
+			if(spookieCount >= itemsCost[item])
 			{
-				maximumSpookage();
+				spookieCount = spookieCount - itemsCost[item];
+				items[item] += 1;
+				if(items[item] % 10 == 0)
+				{
+					maximumSpookage();
+				}
 			}
-		}
+			gameUpdate();
+		};
+		
 	}
 	gameUpdate();
 }
@@ -205,8 +317,7 @@ function gameLoop()
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
 	dayornight = stuff[0];
-
-	if (time%600)
+	if (time%600==0)
 	{
 		save();
 	};
@@ -272,6 +383,17 @@ function gameLoop()
 		document.body.style.color = "#FFFFFF";
 	};
 	document.title = Math.round(spookieCount) + " Spookies"
+	if (achieved !=null) 
+	{
+		for (id in achievements) 
+		{
+			var a = achievements[id];
+			if(a.got == false)
+			{
+				a.check();
+			}
+		};
+	};
 	gameUpdate();
 }
 
@@ -280,6 +402,7 @@ function displayUpdate()
 
 	
 	document.getElementById("spookiesCount").innerHTML = prettyNumbers(spookieCount);
+	document.getElementById("spookiesCount").title=Math.floor(spookieCount) + " Spookies"
 	if (dayornight == "night")
 	{
 		document.getElementById("spookiesPerSecondCount").innerHTML = sps*2;
@@ -298,6 +421,7 @@ function displayUpdate()
 	}
 	
 	document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
+	document.getElementById("totalSpookiesCount").title=Math.floor(totalSpookies) + " Spookies"
 	document.getElementById("time").innerHTML = prettyTime;
 
 	for(item in items)
@@ -323,10 +447,23 @@ function displayUpdate()
 			}
 		}
 	};
+	var temp = ""
+	for (var i = 0; i < achieved.length; i++) 
+	{
+		var a = achievements[achieved[i]];
+
+		temp += "<div><h3>"+a.name+"</h3><p>"+a.desc+"</p></div>";
+	}
+	if (temp == "")
+	{
+		temp = "<div><h3>No achievements yet :(</div></h3>";
+	};
+	document.getElementById("achieved").innerHTML= temp;
 	requestAnimationFrame(displayUpdate);
 	
 	
 	document.title = Math.round(spookieCount) + " Spookies"
+	messageHandler();
 }
 function dayNight()
 {
@@ -377,7 +514,7 @@ function dayNight()
 		return ["night", currentTime];
 	};
 }
-function settings (e) 
+function settings (e, thing) 
 {
 	if (e=="help")
 	{
@@ -393,8 +530,8 @@ function settings (e)
 		{
 			resetGame();
 		}
-	};
-	if(settingsOpen==true && e!="help")
+	}
+	else if(settingsOpen==true && achievesOpen == false)
 	{
 		document.getElementById("cover").style.visibility ="hidden";
 		document.getElementById("settings").style.visibility ="hidden";
@@ -406,6 +543,21 @@ function settings (e)
 		document.getElementById("cover").style.visibility ="visible";
 		document.getElementById("settings").style.visibility ="visible";
 		settingsOpen = true;
+	};
+}
+function showAchieves()
+{
+	if (achievesOpen == false)
+	{
+		achievesOpen = true;
+		document.getElementById("cover2").style.visibility ="visible";
+		document.getElementById("achievementPopup").style.visibility ="visible";
+	}
+	else if (achievesOpen == true)
+	{
+		achievesOpen = false;
+		document.getElementById("cover2").style.visibility ="hidden";
+		document.getElementById("achievementPopup").style.visibility ="hidden";
 	};
 }
 function gameUpdate()
@@ -423,22 +575,34 @@ function gameUpdate()
 }
 
 window.addEventListener('load',function(){
-	document.getElementById("jackOLanternShop").addEventListener("click", function(){buy("jackOLantern");}, false);
-	document.getElementById("skellingtonsShop").addEventListener("click", function(){buy("skellingtons");}, false);
-	document.getElementById("spookySpidersShop").addEventListener("click", function(){buy("spookySpiders");}, false);
-	document.getElementById("ectoplasmShop").addEventListener("click", function(){buy("ectoplasm");}, false);
-	document.getElementById("hauntedHouseShop").addEventListener("click", function(){buy("hauntedHouse");}, false);
+	load();
+	
+	document.getElementById("jackOLanternShop").addEventListener("click", function(e)
+	{
+		buy("jackOLantern", e.ctrlKey,e.shiftKey);
+
+	}, false);
+	document.getElementById("skellingtonsShop").addEventListener("click", function(e){buy("skellingtons",e.ctrlKey,e.shiftKey);}, false);
+	document.getElementById("spookySpidersShop").addEventListener("click", function(e){buy("spookySpiders",e.ctrlKey,e.shiftKey);}, false);
+	document.getElementById("ectoplasmShop").addEventListener("click", function(e){buy("ectoplasm",e.ctrlKey,e.shiftKey);}, false);
+	document.getElementById("hauntedHouseShop").addEventListener("click", function(e){buy("hauntedHouse",e.ctrlKey,e.shiftKey);}, false);
 	document.getElementById("spookyBill").addEventListener("click", spookies);
 	document.getElementById("settingsButton").addEventListener("click", function(){settings()}, false);
+	document.getElementById("achievementButton").addEventListener("click", function(){showAchieves()}, false);
 	document.getElementById("cover").addEventListener("click", function(){settings();}, false);
+	document.getElementById("cover2").addEventListener("click", function(){showAchieves();}, false);
 	document.getElementById("reset").addEventListener("click", function(){settings("reset")}, false);
 	document.getElementById("cross").addEventListener("click", function(){settings();}, false);
 	document.getElementById("save").addEventListener("click", function(){settings("save");}, false);
 	document.getElementById("help").addEventListener("click", function(){settings("help");}, false);
+	//document.getElementById("version").addEventListener("click", devSpookies);
 	document.getElementById('spookyBill').ondragstart = function() { return false;spookies(); };
 });
-
+window.addEventListener('unload',function(){save();});
 
 var timer = window.setInterval(function(){gameLoop();}, 1000);
 
 requestAnimationFrame(displayUpdate);
+})()
+	
+	
