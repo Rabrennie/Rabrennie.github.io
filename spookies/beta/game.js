@@ -20,7 +20,7 @@ var spookieCount,
 	dayornight = "day",
 	settingsOpen = false,
 	achievesOpen = false,
-	achieved = {},
+	achieved = [],
 	messages = [],
 	messageTimer =0,
 	messageOpacity = 0;
@@ -29,17 +29,17 @@ var spookieCount,
 	//"name": new ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt),
 var achievements =
 {
-	"2 Spooky": new ach(0, "2 Spooky", "Earn at least two Spookies",2,0,0,0,0,0,0,0),
+	0: new ach(0, "2 Spooky", "Earn at least two Spookies",2,0,0,0,0,0,0,0),
 
-	"13 lumens": new ach(1, "13 lumens","Own at least one Jack O'Lantern",0,0,0,1,0,0,0,0),
+	1: new ach(1, "13 lumens","Own at least one Jack O'Lantern",0,0,0,1,0,0,0,0),
 
-	"Auto Spook": new ach(2,"Auto Spook","Have at least ten Spookies per second",0,10,0,0,0,0,0,0),
+	2: new ach(2,"Auto Spook","Have at least ten Spookies per second",0,10,0,0,0,0,0,0),
 
-	"Way 2 Spooky": new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2),
+	3: new ach(3,"Way 2 Spooky","Have at least two of every item",0,0,0,2,2,2,2,2),
 
-	"Who you gonna call?": new ach(4,"Who you gonna call?","Own at least one litre of ectoplasm",0,0,0,0,0,0,1,0),
+	4: new ach(4,"Who you gonna call?","Own at least one litre of ectoplasm",0,0,0,0,0,0,1,0),
 
-	"Spooky Scary Skeletons": new ach(5,"Spooky Scary Skeletons","Own at least one Skellington",0,0,0,0,1,0,0,0)
+	5: new ach(5,"Spooky Scary Skeletons","Own at least one Skellington",0,0,0,0,1,0,0,0)
 
 }
 	
@@ -125,14 +125,14 @@ function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
 	this.desc = desc;
 	this.get = function()
 	{
-		achieved[name] = {"id":id,"name":name,"desc":desc}
+		achieved.push(this.id)
 		this.got=true;
-		messages.unshift('Achievement earned: "'+ this.name +'"')
+		messages.push('Achievement earned: "'+ this.name +'"')
 	};
 
 	this.check = function()
 	{
-		if (achieved[this.name] != null)
+		if (achieved.indexOf(this.id) != -1)
 		{
 			this.got=true;
 		}
@@ -150,11 +150,11 @@ function resetGame()
 	{
 		items[name] = 0;
 	};
-	achieved = {};
+	achieved = [];
 
 	gameLoop();
 
-	achieved = {};
+	achieved = [];
 	for (name in achievements) {
 		achievements[name].got = false;
 	};
@@ -254,7 +254,7 @@ function load()
 	}
 	if (achieved == null)
 	{
-		achieved = {};
+		achieved = [];
 	};
 	gameUpdate();
 }
@@ -357,9 +357,9 @@ function gameLoop()
 	document.title = Math.round(spookieCount) + " Spookies"
 	if (achieved !=null) 
 	{
-		for (name in achievements) 
+		for (id in achievements) 
 		{
-			var a = achievements[name];
+			var a = achievements[id];
 			if(a.got == false)
 			{
 				a.check();
@@ -420,11 +420,11 @@ function displayUpdate()
 		}
 	};
 	var temp = ""
-	for(name in achieved)
+	for(id in achieved)
 	{
-		var a = achieved[name];
+		var a = achievements[id];
 
-		temp += "<div><h3>"+name+"</h3><p>"+a.desc+"</p></div>";
+		temp += "<div><h3>"+a.name+"</h3><p>"+a.desc+"</p></div>";
 	}
 	if (temp == "")
 	{
