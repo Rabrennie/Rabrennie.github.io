@@ -49,7 +49,7 @@ var achievements =
 
 	9: new ach(9,"2 Spooky 4 Me","Have at least 2,000,000 Total Spookies",2000000,0,0,0,0,0,0,0),
 
-	9: new ach(9,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0)
+	10: new ach(10,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0)
 
 
 
