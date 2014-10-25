@@ -327,7 +327,7 @@ function maximumSpookage()
 }
 function gameLoop()
 {	
-	console.log(ghosties)
+
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
 	dayornight = stuff[0];
