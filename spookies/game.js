@@ -442,7 +442,7 @@ function displayUpdate()
 	for(item in items)
 	{
 		var temp = item+"Cost";
-		document.getElementById(temp.trim()).innerHTML = itemsCost[item];
+		document.getElementById(temp.trim()).innerHTML = prettyNumbers(itemsCost[item]);
 	}
 	for(item in items)
 	{
