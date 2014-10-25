@@ -49,12 +49,25 @@ var achievements =
 
 	9: new ach(9,"2 Spooky 4 Me","Have at least 2,000,000 Total Spookies",2000000,0,0,0,0,0,0,0),
 
-	10: new ach(10,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0)
+	10: new ach(10,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0),
 
-
-
+	11: new ach(11,"Haunted","Have at least 50 ghosts on the screen at once",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity)
 
 }
+
+achievements[11].check = function() {
+
+	if (achieved.indexOf(this.id) != -1)
+	{
+		this.got=true;
+	}
+	else if (ghosties.length >= 50)
+	{
+		this.get();
+	};
+
+}
+
 	
 function devSpookies()
 {
@@ -314,6 +327,7 @@ function maximumSpookage()
 }
 function gameLoop()
 {	
+	console.log(ghosties)
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
 	dayornight = stuff[0];
@@ -443,7 +457,7 @@ function displayUpdate()
 			if(ghosties[i].y < 0)
 			{
 				document.body.removeChild(ghosties[i].element);
-				delete ghosties[i]
+				ghosties.splice(i, 1);
 			}
 		}
 	};
@@ -562,7 +576,6 @@ function showAchieves()
 }
 function gameUpdate()
 {	
-
 	itemsCost["jackOLantern"] = 20 + Math.round(20 * Math.pow(items["jackOLantern"],1.09));
 	itemsCost["skellingtons"] = 50 + Math.round(50 * Math.pow(items["skellingtons"],1.09));
 	itemsCost["spookySpiders"] = 100 + Math.round(100 * Math.pow(items["spookySpiders"],1.09));
