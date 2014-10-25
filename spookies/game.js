@@ -228,7 +228,7 @@ function ghostie(x,y, id)
 	this.element.style.left = this.x + "px";
 	this.element.style.top = this.y + "px";
 	this.element.style.cursor = "pointer"
-	this.element.addEventListener("click", spookies);
+	this.element.addEventListener("mousedown", spookies);
 	this.element.ondragstart = function() { return false; };
 
 	this.draw = function()
@@ -605,7 +605,7 @@ window.addEventListener('load',function(){
 	document.getElementById("spookySpidersShop").addEventListener("click", function(e){buy("spookySpiders",e.ctrlKey,e.shiftKey);}, false);
 	document.getElementById("ectoplasmShop").addEventListener("click", function(e){buy("ectoplasm",e.ctrlKey,e.shiftKey);}, false);
 	document.getElementById("hauntedHouseShop").addEventListener("click", function(e){buy("hauntedHouse",e.ctrlKey,e.shiftKey);}, false);
-	document.getElementById("spookyBill").addEventListener("click", spookies);
+	document.getElementById("spookyBill").addEventListener("mousedown", spookies);
 	document.getElementById("settingsButton").addEventListener("click", function(){settings()}, false);
 	document.getElementById("achievementButton").addEventListener("click", function(){showAchieves()}, false);
 	document.getElementById("cover").addEventListener("click", function(){settings();}, false);
@@ -615,7 +615,8 @@ window.addEventListener('load',function(){
 	document.getElementById("save").addEventListener("click", function(){settings("save");}, false);
 	document.getElementById("help").addEventListener("click", function(){settings("help");}, false);
 	//document.getElementById("version").addEventListener("click", devSpookies);
-	document.getElementById('spookyBill').ondragstart = function() { return false;spookies(); };
+	document.getElementById('spookyBill').ondragstart = function() { return false; };
+	document.getElementById('spookySkellington').ondragend = function() {spookies(); };
 });
 window.addEventListener('unload',function(){save();});
 

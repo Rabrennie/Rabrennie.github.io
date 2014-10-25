@@ -610,6 +610,7 @@ window.addEventListener('load',function(){
 	document.getElementById("help").addEventListener("click", function(){settings("help");}, false);
 	//document.getElementById("version").addEventListener("click", devSpookies);
 	document.getElementById('spookyBill').ondragstart = function() { return false;spookies(); };
+	document.getElementById('spookyBill').ondragend = function() {spookies(); };
 });
 window.addEventListener('unload',function(){save();});
 
