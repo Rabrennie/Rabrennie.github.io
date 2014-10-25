@@ -446,7 +446,7 @@ function displayUpdate()
 
 		if (itemsCost[item] > 1000000)
 		{
-			document.getElementById(temp.trim()).title = itemsCost[item];
+			document.getElementById(temp.trim()).title = itemsCost[item] + " Spookies";
 		};
 	}
 	for(item in items)
