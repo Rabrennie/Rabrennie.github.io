@@ -20,7 +20,9 @@ var spookieCount,
 	dayornight = "day",
 	settingsOpen = false,
 	achievesOpen = false,
+	upgradesOpen = false,
 	achieved = [],
+	boughtUpgrades = [],
 	messages = [],
 	messageTimer =0,
 	messageOpacity = 0;
@@ -51,11 +53,28 @@ var achievements =
 
 	10: new ach(10,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0),
 
-	11: new ach(11,"Haunted","Have at least 50 ghosts on the screen at once",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity)
+	11: new ach(11,"Haunted","Have at least 50 ghosts on the screen at once",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity),
+
+	12: new ach(12,"Upgrader","Own at least 1 upgrade",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity),
+};
+
+	//id : new upgrade (id,"name","desc",cost,spsMulti,spcMulti,spsItems, spcItems) 
+var upgrades = 
+{
+	0:new upgrade(0,"Lightbulb","<b>+1</b> Spookies per second and <b>+0.5</b> Spookies per click for every Jack O'Lantern you own",100,1,1,{jackOLantern:1},{jackOLantern:0.5}),
+
+	1 : new upgrade (1,"Psychomagnotheric Slime","<b>+10</b> Spookies per second and <b>+5</b> Spookies per click for every litre of Ectoplasm you own",20000,1,1,{ectoplasm:10}, {ectoplasm:5}),
+
+	2 : new upgrade (2,"World Wide Web","<b>+4</b> Spookies per second and <b>+2</b> Spookies per click for every Spooky Spider you own",3000,1,1,{spookySpiders:4}, {spookySpiders:2}),
+
+	3 : new upgrade (3,"Mansions","<b>+100</b> Spookies per second and <b>+20</b> Spookies per click for every Haunted House you own",1000000,1,1,{hauntedHouse:100}, {hauntedHouse:20}),
+
+	4 : new upgrade (4,"Spooky Sounds","<img src='http://i3.kym-cdn.com/photos/images/newsfeed/000/407/216/693.gif'>",1000000,3,3,{}, {}) 
 
 }
 
-achievements[11].check = function() {
+achievements[11].check = function() 
+{
 
 	if (achieved.indexOf(this.id) != -1)
 	{
@@ -65,14 +84,25 @@ achievements[11].check = function() {
 	{
 		this.get();
 	};
+};
+achievements[12].check = function() 
+{
 
-}
-
+	if (achieved.indexOf(this.id) != -1)
+	{
+		this.got=true;
+	}
+	else if (boughtUpgrades.length >= 1)
+	{
+		this.get();
+	};
+};
 	
 function devSpookies()
 {
 	spookieCount += 10000000000000;
-}
+};
+
 function prettyNumbers(n)
 {
 	//stolen from cookie clicker #NoShame
@@ -107,7 +137,8 @@ function prettyNumbers(n)
 	{
 		return Math.floor(n);
 	}
-}
+};
+
 function messageHandler()
 {
 	var white = ((dayornight=="day")? ((twoSpooky)? true:false):true)
@@ -119,7 +150,7 @@ function messageHandler()
 	{
 		rgbvalue = "rgba(255,255,255,"+messageOpacity+")";
 	};
-	if (messages[0] != undefined)
+	if (messages[0] != undefined && !settingsOpen && !achievesOpen && !upgradesOpen )
 	{
 		document.getElementById("message").style.color= rgbvalue;
 		document.getElementById("message").innerHTML = messages[0];
@@ -144,9 +175,9 @@ function messageHandler()
 	else
 	{
 		document.getElementById("message").innerHTML = ""
-	};
-	
-}
+	};	
+};
+
 function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
 {
 	this.id=id;
@@ -171,7 +202,38 @@ function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
 			this.get()
 		};
 	};
-}
+};
+
+function upgrade (id,name,desc,cost,spsMulti,spcMulti,spsItems, spcItems) 
+{
+	this.id = id;
+	this.name = name;
+	this.desc = desc;
+	this.cost = cost;
+
+	this.got = false;
+
+	this.spsMulti = spsMulti;
+	this.spcMulti = spcMulti;
+
+	this.spsItems = spsItems;
+	this.spcItems = spcItems;
+
+	this.buy = function () 
+	{
+		if (!this.got)
+		{
+			if (spookieCount >= this.cost)
+			{
+				spookieCount -= this.cost;
+				this.got = true;
+				gameUpdate();
+				messages.push('Upgrade bought: "'+this.name+'"' );
+				boughtUpgrades.push(this.id);
+			};
+		};
+	}
+};
 
 function resetGame()
 {
@@ -180,15 +242,8 @@ function resetGame()
 	{
 		items[name] = 0;
 	};
-	achieved = [];
 
 	gameLoop();
-
-	achieved = [];
-	for (name in achievements) {
-		achievements[name].got = false;
-	};
-
 
 	twoSpooky = false;
 	timer = 0;
@@ -197,18 +252,26 @@ function resetGame()
 	totalSpookies = 0;
 	time=0;
 
+	achieved = [];
+
+	for (name in achievements) {
+		achievements[name].got = false;
+	};
+	boughtUpgrades = [];
+	for (id in upgrades) {
+		upgrades[id].got=false;
+	};
+
 	messages.push("Game Reset")
-}
+};
 
 function spookies(e)
 {
 	//console.log(e)
-	ghosties.push(new ghostie(e.clientX, e.clientY,ghostiesId))
-	var extraMultiplier = twoSpooky ? 2:1;
-	spookieCount +=1 * multiplier * extraMultiplier;
-	totalSpookies += 1 * multiplier * extraMultiplier;
-			
-}
+	spookieCount +=1 * multiplier;
+	totalSpookies += 1 * multiplier;
+	ghosties.push(new ghostie(e.clientX, e.clientY,ghostiesId))				
+};
 
 function ghostie(x,y, id)
 {
@@ -238,7 +301,7 @@ function ghostie(x,y, id)
 		this.element.style.top= this.y + "px";
 
 	}
-}
+};
 
 function save()
 {
@@ -250,9 +313,12 @@ function save()
 	localStorage.setItem("hauntedHouse", items["hauntedHouse"]);
 	localStorage.setItem("totalSpookies", totalSpookies);
 	localStorage.setItem("achieved", JSON.stringify(achieved))
+	localStorage.setItem("boughtUpgrades", JSON.stringify(boughtUpgrades))
 	localStorage.setItem("time", time);
-	messages.push("Game Saved")
-}
+	
+
+	if (messages.indexOf("Game Saved")==-1) {messages.push("Game Saved")};
+};
 
 function load()
 {
@@ -264,6 +330,7 @@ function load()
 	items["hauntedHouse"] = parseInt(localStorage.getItem("hauntedHouse"));
 	totalSpookies = parseInt(localStorage.getItem("totalSpookies"));
 	achieved = JSON.parse(window.localStorage.getItem("achieved"));
+	boughtUpgrades = JSON.parse(window.localStorage.getItem("boughtUpgrades"));
 	time = parseInt(localStorage.getItem("time"));
 
 	if(isNaN(spookieCount))
@@ -291,8 +358,18 @@ function load()
 	{
 		achieved = [];
 	};
+	if (boughtUpgrades == null) 
+	{
+		boughtUpgrades = []
+	}
+	else
+	{
+		for (var i = 0; i < boughtUpgrades.length; i++) {
+			upgrades[boughtUpgrades[i]].got=true;
+		};
+	};
 	gameUpdate();
-}
+};
 
 function buy(item, ten, hundred)
 {
@@ -315,7 +392,8 @@ function buy(item, ten, hundred)
 		
 	}
 	gameUpdate();
-}
+};
+
 function maximumSpookage()
 {
 	document.getElementById("spookyBill").src = "spook.gif";
@@ -324,9 +402,12 @@ function maximumSpookage()
 	document.body.style.color = "#FFFFFF";
 	twoSpooky = true;
 	timer += 10;
-}
+};
+
 function gameLoop()
 {	
+	spookieCount += sps;
+	totalSpookies += sps;
 
 	var stuff = dayNight();
 	prettyTime = stuff[1].slice(0,2)+":"+ stuff[1].slice(-2);
@@ -338,8 +419,6 @@ function gameLoop()
 	};
 	if(twoSpooky)
 	{
-		
-		
 		if(timer > 0)
 		{
 			timer = timer -1;
@@ -358,46 +437,6 @@ function gameLoop()
 			
 		}
 	}
-	if (dayornight == "night" && !twoSpooky)
-	{
-		document.getElementById("spookyBill").src = "spookybill.jpg"
-		document.body.style.background = "#000000";
-		document.body.style.color = "#FFFFFF";
-		document.getElementById("maximumSpookage").style.color= "#000000";
-		spookieCount += (sps*2);
-		totalSpookies += (sps*2);
-	}
-	else if (dayornight == "night" && twoSpooky)
-	{
-		document.body.style.background = "#000000";
-		document.body.style.color = "#FFFFFF";
-		spookieCount += (sps*2);
-		totalSpookies += (sps*2);
-	}
-	else if(dayornight == "day" && !twoSpooky)
-	{
-		document.getElementById("spookyBill").src = "spookybill.jpg";
-		document.body.style.background = "#FFFFFF";
-		document.body.style.color = "#000000";
-		document.getElementById("maximumSpookage").style.color= "#FFFFFF";
-		spookieCount += sps;
-		totalSpookies += sps;
-	}
-	else if(dayornight == "day" && twoSpooky)
-	{
-		document.body.style.background = "#000000";
-		document.body.style.color = "#FFFFFF";
-		document.getElementById("maximumSpookage").style.color= "#FFFFFF";
-		spookieCount += sps;
-		totalSpookies += sps;
-	}
-	else
-	{	
-
-		document.body.style.background = "#0000000";
-		document.body.style.color = "#FFFFFF";
-	};
-	document.title = Math.round(spookieCount) + " Spookies"
 	if (achieved !=null) 
 	{
 		for (id in achievements) 
@@ -409,6 +448,7 @@ function gameLoop()
 			}
 		};
 	};
+	document.title = prettyNumbers(spookieCount) + " Spookies"
 	gameUpdate();
 }
 
@@ -418,22 +458,9 @@ function displayUpdate()
 	
 	document.getElementById("spookiesCount").innerHTML = prettyNumbers(spookieCount);
 	document.getElementById("spookiesCount").title=Math.floor(spookieCount) + " Spookies"
-	if (dayornight == "night")
-	{
-		document.getElementById("spookiesPerSecondCount").innerHTML = sps*2;
-	}
-	else
-	{
-		document.getElementById("spookiesPerSecondCount").innerHTML = sps;
-	};
-	if(twoSpooky)
-	{
-		document.getElementById("spookiesPerClickCount").innerHTML = multiplier*2;
-	}
-	else
-	{
-		document.getElementById("spookiesPerClickCount").innerHTML = multiplier;
-	}
+
+	document.getElementById("spookiesPerSecondCount").innerHTML = sps;
+	document.getElementById("spookiesPerClickCount").innerHTML = multiplier;
 	
 	document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
 	document.getElementById("totalSpookiesCount").title=Math.floor(totalSpookies) + " Spookies"
@@ -454,6 +481,39 @@ function displayUpdate()
 		var temp = item+"Numbers";
 		document.getElementById(temp.trim()).innerHTML = items[item];
 	}
+	if (dayornight == "night" && !twoSpooky)
+	{
+		document.getElementById("spookyBill").src = "spookybill.jpg"
+		document.body.style.background = "#000000";
+		document.body.style.color = "#FFFFFF";
+		document.getElementById("maximumSpookage").style.color= "#000000";
+	}
+	else if (dayornight == "night" && twoSpooky)
+	{
+		document.body.style.background = "#000000";
+		document.body.style.color = "#FFFFFF";
+	}
+	else if(dayornight == "day" && !twoSpooky)
+	{
+		document.getElementById("spookyBill").src = "spookybill.jpg";
+		document.body.style.background = "#FFFFFF";
+		document.body.style.color = "#000000";
+		document.getElementById("maximumSpookage").style.color= "#FFFFFF";
+		
+	}
+	else if(dayornight == "day" && twoSpooky)
+	{
+		document.body.style.background = "#000000";
+		document.body.style.color = "#FFFFFF";
+		document.getElementById("maximumSpookage").style.color= "#FFFFFF";
+	}
+	else
+	{	
+
+		document.body.style.background = "#0000000";
+		document.body.style.color = "#FFFFFF";
+	};
+	
 
 	for (var i = ghosties.length - 1; i >= 0; i--) {
 		if (ghosties[i] != undefined)
@@ -478,11 +538,13 @@ function displayUpdate()
 	{
 		temp = "<div><h3>No achievements yet :(</div></h3>";
 	};
+
+	document.getElementById("achievementCount").innerHTML = achieved.length;
+
 	document.getElementById("achieved").innerHTML= temp;
+
+
 	requestAnimationFrame(displayUpdate);
-	
-	
-	document.title = Math.round(spookieCount) + " Spookies"
 	messageHandler();
 }
 function dayNight()
@@ -580,6 +642,26 @@ function showAchieves()
 		document.getElementById("achievementPopup").style.visibility ="hidden";
 	};
 }
+function showUpgrades() 
+{
+	if (upgradesOpen == false)
+	{
+		upgradesOpen = true;
+		document.getElementById("cover3").style.visibility ="visible";
+		document.getElementById("upgradesPopup").style.visibility ="visible";
+	}
+	else if (upgradesOpen == true)
+	{
+		upgradesOpen = false;
+		document.getElementById("cover3").style.visibility ="hidden";
+		document.getElementById("upgradesPopup").style.visibility ="hidden";
+	};
+}
+function lel(id)
+{
+	var	id=id
+	return function(id){console.log(id)};
+}
 function gameUpdate()
 {	
 	itemsCost["jackOLantern"] = 20 + Math.round(20 * Math.pow(items["jackOLantern"],1.09));
@@ -588,9 +670,103 @@ function gameUpdate()
 	itemsCost["ectoplasm"] = 500 + Math.round(500 * Math.pow(items["ectoplasm"],1.09));
 	itemsCost["hauntedHouse"] = 100000 + Math.round(100000 * Math.pow(items["hauntedHouse"],1.09));
 
+	var temp = ""
+	document.getElementById("upgrades").innerHTML = temp;
+	for (id in upgrades) 
+	{
+		var u = upgrades[id]
+
+		if(!u.got)
+		{
+			var idtemp = "u"+u.id;
+			var id = u.id;
+			temp = document.createElement("div");
+			temp.id= idtemp;
+			temp.innerHTML = "<h3>"+u.name+"</h3><p>Cost: "+u.cost+" Spookies</p><p>"+u.desc+"</p>";
+
+			document.getElementById("upgrades").appendChild(temp);
+
+		    if (typeof window.addEventListener === 'function'){
+		        (function (_id) {
+		            temp.addEventListener('click', function(){
+		                console.log(_id);
+		                upgrades[_id].buy();
+		            });
+		        })(u.id);
+		    }
+			
+			
+		}
+
+
+	}
+	if (temp == "")
+	{
+		temp = "<div><h3>You own all the upgrades :)</div></h3>";
+		document.getElementById("upgrades").innerHTML= temp;
+	};
+
 	
-	sps = items["skellingtons"]*2 + items["spookySpiders"]*4 + items["ectoplasm"]*10 + items["hauntedHouse"]*100;
-	multiplier = 1 + (0.5*items["jackOLantern"])+(2*items["ectoplasm"]) + (20*items["hauntedHouse"]);
+	spookyMath();	
+}
+
+function spookyMath()
+{
+
+	sps = 0;
+	multiplier = 1;
+	var baseSpS = 
+	{
+		jackOLantern 	: 0,
+		skellingtons 	: 2,
+		spookySpiders 	: 4,
+		ectoplasm 		: 10,
+		hauntedHouse 	: 100
+	};
+	var baseSpC = 
+	{
+		jackOLantern 	: 0.5,
+		skellingtons 	: 1,
+		spookySpiders 	: 2,
+		ectoplasm 		: 5,
+		hauntedHouse 	: 20
+	};
+
+	var multiplierSpS = 1,
+		multiplierSpC = 1;
+
+	multiplierSpS += ((dayornight=="day") ? 0:1)
+	multiplierSpC += twoSpooky ? 1:0;
+
+	for (upgrade in upgrades) {
+		var u = upgrades[upgrade];
+		if (u.got)
+		{
+			multiplierSpS *= u.spsMulti;
+			multiplierSpC *= u.spcMulti;
+
+			for (item in u.spsItems) {
+				baseSpS[item] += u.spsItems[item];
+			};
+			for (item in u.spcItems) {
+				baseSpC[item] += u.spcItems[item];
+			};
+		};
+	};
+
+	for(item in items)
+	{
+		sps += items[item]*baseSpS[item];
+	};
+
+	for(item in items)
+	{
+		multiplier += items[item]*baseSpC[item];
+	};
+
+	sps *= multiplierSpS;
+
+	multiplier *= multiplierSpC;
 }
 
 window.addEventListener('load',function(){
@@ -608,8 +784,10 @@ window.addEventListener('load',function(){
 	document.getElementById("spookyBill").addEventListener("mousedown", spookies);
 	document.getElementById("settingsButton").addEventListener("click", function(){settings()}, false);
 	document.getElementById("achievementButton").addEventListener("click", function(){showAchieves()}, false);
+	document.getElementById("upgradesButton").addEventListener("click", function(){showUpgrades()}, false);
 	document.getElementById("cover").addEventListener("click", function(){settings();}, false);
 	document.getElementById("cover2").addEventListener("click", function(){showAchieves();}, false);
+	document.getElementById("cover3").addEventListener("click", function(){showUpgrades();}, false);
 	document.getElementById("reset").addEventListener("click", function(){settings("reset")}, false);
 	document.getElementById("cross").addEventListener("click", function(){settings();}, false);
 	document.getElementById("save").addEventListener("click", function(){settings("save");}, false);
