@@ -209,6 +209,7 @@ function upgrade (id,name,desc,cost,spsMulti,spcMulti,spsItems, spcItems)
 			{
 				spookieCount -= this.cost;
 				this.got = true;
+				gameUpdate();
 				messages.push('Upgrade bought: "'+this.name+'"' );
 				boughtUpgrades.push(this.id);
 			};
