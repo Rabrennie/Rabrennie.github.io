@@ -53,7 +53,9 @@ var achievements =
 
 	10: new ach(10,"Efficient Spookage","Gain at least 10 Spookies per click",0,0,10,0,0,0,0,0),
 
-	11: new ach(11,"Haunted","Have at least 50 ghosts on the screen at once",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity)
+	11: new ach(11,"Haunted","Have at least 50 ghosts on the screen at once",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity),
+
+	12: new ach(12,"Upgrader","Own at least 1 upgrade",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity),
 };
 
 	//id : new upgrade (id,"name","desc",cost,spsMulti,spcMulti,spsItems, spcItems) 
@@ -79,6 +81,18 @@ achievements[11].check = function()
 		this.got=true;
 	}
 	else if (ghosties.length >= 50)
+	{
+		this.get();
+	};
+};
+achievements[12].check = function() 
+{
+
+	if (achieved.indexOf(this.id) != -1)
+	{
+		this.got=true;
+	}
+	else if (boughtUpgrades.length >= 1)
 	{
 		this.get();
 	};
