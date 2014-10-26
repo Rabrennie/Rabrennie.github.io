@@ -166,6 +166,13 @@
 		right:130px;
 		cursor: pointer;
 	}
+	#upgradesButton
+	{
+		position: fixed;
+		top:10px;
+		right:295px;
+		cursor: pointer;
+	}
 	#settings
 	{
 		
@@ -190,7 +197,7 @@
 		margin: 0 60px;
 		cursor: pointer;
 	}
-	#cover, #cover2
+	#cover, #cover2, #cover3
 	{
 		position: fixed;
 		top: 0px;
@@ -266,6 +273,39 @@
 		word-wrap: break-word;
 	}
 
+	#upgradesPopup
+	{
+		
+		position: fixed;
+		overflow-y: scroll;
+		overflow-x:hidden;
+		top: 100px;
+		left: 50%;
+		margin-left: -250px;
+		padding: 0;
+		background-color: white;
+		color: black;
+		width:500px;
+		height:500px;
+		border: solid 1px black;
+		visibility: hidden;
+		z-index: 100000000000;
+		text-align: center;
+	}
+
+	#upgradesPopup div
+	{
+		text-align: left;
+		padding:5px 10px;
+		width:400px;
+		word-wrap: break-word;
+	}
+
+	#upgradesPopup div p 
+	{
+		padding-top: 0px;
+	}
+
 
 	</style>
 </head>
@@ -322,14 +362,16 @@
 	<div id="time">00:00</div>
 	<div id="message"></div>
 	
-	<div id="version">v0.5</div>
+	<div id="version">v0.6 Beta</div>
 	
 	<div id="ghostieDiv"></div>
 
 	<span id="settingsButton">Settings</span>
-	<span id="achievementButton">Achievements</span>
+	<span id="achievementButton">Achievements (<span id="achievementCount"></span>)</span>
+	<span id="upgradesButton">Upgrades</span>
 	<div id="cover"></div>
 	<div id="cover2"></div>
+	<div id="cover3"></div>
 	<div id="settings">
 		<span id="save">Save</span>
 		<span id="reset">Reset</span>
@@ -350,14 +392,16 @@
 	<div id="achievementPopup">
 		<h2>Achievements</h2>
 		<div id="achieved">
-			<div>
-				<h3>Spooky Start</h3>
-				<p>Earn one spookie</p>
-			</div>
-			<div>
-				<h3>Jack</h3>
-				<p>Buy one Jack O'Lantern</p>
-			</div>
+		</div>
+
+	</div>
+
+	<div id="upgradesPopup">
+		
+		<h2>Upgrades</h2>
+
+		<div id="upgrades">
+			
 		</div>
 
 	</div>
