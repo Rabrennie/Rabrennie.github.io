@@ -772,7 +772,7 @@ window.addEventListener('load',function(){
 	document.getElementById("cross").addEventListener("click", function(){settings();}, false);
 	document.getElementById("save").addEventListener("click", function(){settings("save");}, false);
 	document.getElementById("help").addEventListener("click", function(){settings("help");}, false);
-	document.getElementById("version").addEventListener("click", devSpookies);
+	//document.getElementById("version").addEventListener("click", devSpookies);
 	document.getElementById('spookyBill').ondragstart = function() { return false; };
 	document.getElementById('spookySkellington').ondragend = function() {spookies(); };
 });
