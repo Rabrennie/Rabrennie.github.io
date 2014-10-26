@@ -63,10 +63,11 @@ var upgrades =
 {
 	0:new upgrade(0,"Lightbulb","<b>+1</b> Spookies per second and <b>+0.5</b> Spookies per click for every Jack O'Lantern you own",100,1,1,{jackOLantern:1},{jackOLantern:0.5}),
 
-	1 : new upgrade (1,"Psychomagnotheric Slime","<b>+10</b> Spookies per second and <b>+5</b> Spookies per click for every litre of Ectoplasm you own",20000,1,1,{ectoplasm:10}, {ectoplasm:5}),
-
 	2 : new upgrade (2,"World Wide Web","<b>+4</b> Spookies per second and <b>+2</b> Spookies per click for every Spooky Spider you own",3000,1,1,{spookySpiders:4}, {spookySpiders:2}),
 
+	1 : new upgrade (1,"Psychomagnotheric Slime","<b>+10</b> Spookies per second and <b>+5</b> Spookies per click for every litre of Ectoplasm you own",20000,1,1,{ectoplasm:10}, {ectoplasm:5}),
+
+	
 	3 : new upgrade (3,"Mansions","<b>+100</b> Spookies per second and <b>+20</b> Spookies per click for every Haunted House you own",1000000,1,1,{hauntedHouse:100}, {hauntedHouse:20}),
 
 	4 : new upgrade (4,"Spooky Sounds","<img src='http://i3.kym-cdn.com/photos/images/newsfeed/000/407/216/693.gif'>",1000000,3,3,{}, {}) 
