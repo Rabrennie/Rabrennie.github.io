@@ -9,6 +9,13 @@ var spookieCount,
 		ectoplasm : 500,
 		hauntedHouse : 100000
 	},
+	itemNames = {
+		jackOLantern : "Jack O'Lantern",
+		skellingtons : "Skellington",
+		spookySpiders : "Spooky Spider",
+		ectoplasm : "Ectoplasm",
+		hauntedHouse : "Haunted House"
+	}
 	multiplier = 1,
 	sps = 0,
 	twoSpooky = false,
@@ -400,7 +407,7 @@ function buy(item, ten, hundred)
 			}
 			gameUpdate();
 		};
-		messages.push(count + " " +  item + "s bought for "+ cost);
+		messages.push(count + " " +  itemNames[item] + "s bought for "+ cost);
 		
 	}
 	gameUpdate();
