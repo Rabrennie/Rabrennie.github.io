@@ -15,7 +15,7 @@ var spookieCount,
 		spookySpiders : "Spooky Spider",
 		ectoplasm : "Ectoplasm",
 		hauntedHouse : "Haunted House"
-	}
+	},
 	multiplier = 1,
 	sps = 0,
 	twoSpooky = false,
