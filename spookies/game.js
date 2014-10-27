@@ -400,7 +400,7 @@ function buy(item, ten, hundred)
 			}
 			gameUpdate();
 		};
-		messages.push(count +  item + "s bought for "+ cost);
+		messages.push(count + " " +  item + "s bought for "+ cost);
 		
 	}
 	gameUpdate();
