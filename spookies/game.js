@@ -407,7 +407,7 @@ function buy(item, ten, hundred)
 			}
 			gameUpdate();
 		};
-		var s = (count==1) ? " s":"" 
+		var s = (count==1) ? "":"s" 
 		messages.push(count + " " +  itemNames[item] + s +" bought for "+ prettyNumbers(cost) + " Spookies");
 		
 	}
