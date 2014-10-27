@@ -378,19 +378,29 @@ function buy(item, ten, hundred)
 	if( item != null && item != undefined)
 	{
 		var n = (ten ? 10:hundred ? 100: 1)
+		var count = 0;
+		var cost = 0;
 		for (var i = 0; i < n; i++) {
 
 			if(spookieCount >= itemsCost[item])
 			{
 				spookieCount = spookieCount - itemsCost[item];
+				count++;
+				cost += itemsCost[item];
 				items[item] += 1;
 				if(items[item] % 10 == 0)
 				{
 					maximumSpookage();
 				}
+				
+			}
+			else
+			{
+				break;
 			}
 			gameUpdate();
 		};
+		messages.push(count +  item + "s bought for "+ cost);
 		
 	}
 	gameUpdate();
