@@ -410,7 +410,7 @@ function buy(item, ten, hundred)
 			gameUpdate();
 		};
 		var s = (count==1) ? "":"s" 
-		if(count > 0)
+		if(count > 1)
 		{
 			messages.push(count + " " +  itemNames[item] + s +" bought for "+ prettyNumbers(cost) + " Spookies");
 		}
