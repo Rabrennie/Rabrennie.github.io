@@ -64,7 +64,7 @@ var achievements =
 
 	12: new ach(12,"Upgrader","Own at least 1 upgrade",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity),
 	
-	13: new ach(9,"HALF A BILL","Have at least 500 Million Total Spookies",50000000,0,0,0,0,0,0,0)
+	13: new ach(9,"HALF A BILL","Have at least 500 Million Total Spookies",500000000,0,0,0,0,0,0,0)
 };
 
 	//id : new upgrade (id,"name","desc",cost,spsMulti,spcMulti,spsItems, spcItems) 
