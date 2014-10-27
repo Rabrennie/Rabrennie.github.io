@@ -194,6 +194,7 @@ function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
 
 	this.check = function()
 	{
+		console.log(achieved);
 		if (achieved.indexOf(this.id) != -1)
 		{
 			this.got=true;
@@ -690,7 +691,6 @@ function gameUpdate()
 		    if (typeof window.addEventListener === 'function'){
 		        (function (_id) {
 		            temp.addEventListener('click', function(){
-		                console.log(_id);
 		                upgrades[_id].buy();
 		            });
 		        })(u.id);
