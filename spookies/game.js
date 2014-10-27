@@ -194,7 +194,7 @@ function ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt)
 
 	this.check = function()
 	{
-		console.log(achieved);
+		
 		if (achieved.indexOf(this.id) != -1)
 		{
 			this.got=true;
@@ -356,7 +356,7 @@ function load()
 	{
 		time = 0;
 	}
-	if (achieved == null)
+	if (achieved == null || achieved.constructor == Object)
 	{
 		achieved = [];
 	};
