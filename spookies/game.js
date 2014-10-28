@@ -32,7 +32,8 @@ var spookieCount,
 	boughtUpgrades = [],
 	messages = [],
 	messageTimer =0,
-	messageOpacity = 0;
+	messageOpacity = 0,
+	images = [];
 
 
 	//id: new ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt),
@@ -148,6 +149,22 @@ function prettyNumbers(n)
 		return Math.floor(n);
 	}
 };
+
+function flyingImages(id,x,y,velX,velY, rot)
+{
+
+	this.img  =document.getElementById(id);
+	this.x = x;
+	this.y = y;
+	this.velX = velX;
+	this.velY = velY;
+	this.width = this.img.clientWidth;
+	this.height = this.img.clientHeight;
+	this.rot = rot;
+
+	console.log(this.width);
+
+}
 
 function messageHandler()
 {
@@ -313,6 +330,43 @@ function ghostie(x,y, id)
 
 	}
 };
+
+function movement()
+{
+
+	for (var i = images.length - 1; i >= 0; i--)
+	{
+		images[i].img.style.visibility = "visible";
+		images[i].img.style.left = images[i].x+"px"
+		images[i].img.style.top = images[i].y+"px"
+		images[i].img.style.transform = "rotate("+images[i].rot+"deg)"
+
+		if (images[i]["x"] >= window.innerWidth-images[i]["width"])
+		{
+			images[i]["velX"] = -images[i]["velX"];
+		}
+		else if (images[i]["x"]<0)
+		{
+			images[i]["velX"] = -images[i]["velX"];
+		};
+
+		if (images[i]["y"] >= window.innerHeight-images[i]["height"])
+		{
+			images[i]["velY"] = -images[i]["velY"]; 
+		}
+		else if (images[i]["y"]<0)
+		{
+			images[i]["velY"] = -images[i]["velY"];;
+		};
+
+		images[i]["y"] += images[i]["velY"];
+		images[i]["x"] += images[i]["velX"];
+		images[i].rot++;
+
+
+	};
+
+}
 
 function save()
 {
@@ -517,6 +571,7 @@ function displayUpdate()
 	{
 		document.body.style.background = "#000000";
 		document.body.style.color = "#FFFFFF";
+		
 	}
 	else if(dayornight == "day" && !twoSpooky)
 	{
@@ -531,12 +586,24 @@ function displayUpdate()
 		document.body.style.background = "#000000";
 		document.body.style.color = "#FFFFFF";
 		document.getElementById("maximumSpookage").style.color= "#FFFFFF";
+		
 	}
 	else
 	{	
 
 		document.body.style.background = "#0000000";
 		document.body.style.color = "#FFFFFF";
+	};
+	if (twoSpooky)
+	{
+		movement();
+	}
+	else
+	{
+		for (var i = images.length - 1; i >= 0; i--)
+		{
+			images[i].img.style.visibility = "hidden";
+		}
 	};
 	
 
@@ -795,6 +862,14 @@ function spookyMath()
 
 window.addEventListener('load',function(){
 	load();
+
+	images = 
+	[
+		new flyingImages("1spooky",200,420,-5,-5,30),
+		new flyingImages("2spooky", 200,220,8,3,10),
+		new flyingImages("3spooky",0,0,4,8,0),
+	
+	]
 	
 	document.getElementById("jackOLanternShop").addEventListener("click", function(e)
 	{
