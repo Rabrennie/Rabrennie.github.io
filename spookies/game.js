@@ -69,7 +69,9 @@ var achievements =
 	
 	14: new ach(14,"Bill(ion) Murray","Have at least 1 Billion Total Spookies",1000000000,0,0,0,0,0,0,0),
 	
-	15 : new ach(15, "I like pi", "Have at least 3.14 Billion Total Spookies",3140000000,0,0,0,0,0,0,0)
+	15 : new ach(15, "I like pi", "Have at least 3.14 Billion Total Spookies",3140000000,0,0,0,0,0,0,0),
+	
+	16 : new ach(16, "2ManyGhosts4Me", "Have at least 100 ghosts on the screen at once",Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity)
 };
 
 	//id : new upgrade (id,"name","desc",cost,spsMulti,spcMulti,spsItems, spcItems) 
@@ -110,6 +112,18 @@ achievements[12].check = function()
 		this.got=true;
 	}
 	else if (boughtUpgrades.length >= 1)
+	{
+		this.get();
+	};
+};
+achievements[16].check = function() 
+{
+
+	if (achieved.indexOf(this.id) != -1)
+	{
+		this.got=true;
+	}
+	else if (ghosties.length >= 100)
 	{
 		this.get();
 	};
