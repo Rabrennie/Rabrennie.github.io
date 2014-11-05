@@ -794,7 +794,7 @@ function gameUpdate()
 			var id = u.id;
 			temp = document.createElement("div");
 			temp.id= idtemp;
-			temp.innerHTML = "<h3>"+u.name+"</h3><p>Cost: "+u.cost+" Spookies</p><p>"+u.desc+"</p>";
+			temp.innerHTML = "<h3>"+u.name+"</h3><p>Cost: "+prettyNumbers(u.cost)+" Spookies</p><p>"+u.desc+"</p>";
 
 			document.getElementById("upgrades").appendChild(temp);
 
