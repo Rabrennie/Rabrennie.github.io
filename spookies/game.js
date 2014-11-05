@@ -67,7 +67,9 @@ var achievements =
 	
 	13: new ach(13,"HALF A BILL","Have at least 500 Million Total Spookies",500000000,0,0,0,0,0,0,0),
 	
-	14: new ach(14,"Bill(ion) Murray","Have at least 1 Billion Total Spookies",1000000000,0,0,0,0,0,0,0)
+	14: new ach(14,"Bill(ion) Murray","Have at least 1 Billion Total Spookies",1000000000,0,0,0,0,0,0,0),
+	
+	15 : new ach(15, "I like pi", "Have at least 3.14 Billion Total Spookies",3140000000,0,0,0,0,0,0,0)
 };
 
 	//id : new upgrade (id,"name","desc",cost,spsMulti,spcMulti,spsItems, spcItems) 
@@ -82,7 +84,9 @@ var upgrades =
 	
 	3 : new upgrade (3,"Mansions","<b>+100</b> Spookies per second and <b>+20</b> Spookies per click for every Haunted House you own",1000000,1,1,{hauntedHouse:100}, {hauntedHouse:20}),
 
-	4 : new upgrade (4,"Spooky Sounds","<img src='http://i3.kym-cdn.com/photos/images/newsfeed/000/407/216/693.gif'>",1000000,3,3,{}, {}) 
+	4 : new upgrade (4,"Spooky Sounds","<img src='http://i3.kym-cdn.com/photos/images/newsfeed/000/407/216/693.gif'>",1000000,3,3,{}, {}),
+	
+	5 : new upgrade (5, "A Quarter Bill", "5x Multiplier",250000000,5,5,{},{})
 
 }
 
