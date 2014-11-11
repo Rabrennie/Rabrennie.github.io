@@ -562,8 +562,8 @@ function spookieCountUpdate()
 	var difference  = thistime - lasttime;
 	spookieCount += (sps/1000)*difference;
 	totalSpookies += (sps/1000)*difference;
-	d = new Date(),
-	lasttime = d.getTime(),
+	d = new Date();
+	lasttime = d.getTime();
 }
 function displayUpdate()
 {
