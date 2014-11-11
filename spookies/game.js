@@ -33,7 +33,10 @@ var spookieCount,
 	messages = [],
 	messageTimer =0,
 	messageOpacity = 0,
-	images = [];
+	images = [],
+	d = new Date(),
+	lasttime = d.getTime(),
+	thistime = d.getTime();
 
 
 	//id: new ach(id,name,desc,total,persec,perclick,jol,skelly,spider,ecto,haunt),
@@ -550,7 +553,17 @@ function gameLoop()
 	document.title = prettyNumbers(spookieCount) + " Spookies"
 	gameUpdate();
 }
-
+function spookieCountUpdate()
+{
+	d = new Date();
+	thistime = d.getTime();
+	var difference  = thistime - lasttime;
+	spookieCount += (sps/1000)*difference;
+	totalSpookies += (sps/1000)*difference;
+	d = new Date(),
+	lasttime = d.getTime(),
+	requestAnimationFrame(spookieCountUpdate);
+}
 function displayUpdate()
 {
 
