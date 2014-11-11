@@ -187,7 +187,7 @@ function flyingImages(id,x,y,velX,velY, rot)
 	this.height = this.img.clientHeight;
 	this.rot = rot;
 
-	console.log(this.width);
+	
 
 }
 
@@ -564,7 +564,6 @@ function spookieCountUpdate()
 	totalSpookies += (sps/1000)*difference;
 	d = new Date(),
 	lasttime = d.getTime(),
-	requestAnimationFrame(spookieCountUpdate);
 }
 function displayUpdate()
 {
