@@ -91,7 +91,9 @@ var upgrades =
 
 	4 : new upgrade (4,"Spooky Sounds","<img src='http://i3.kym-cdn.com/photos/images/newsfeed/000/407/216/693.gif'>",1000000,3,3,{}, {}),
 	
-	5 : new upgrade (5, "A Quarter Bill", "5x Multiplier",250000000,5,5,{},{})
+	5 : new upgrade (5, "A Quarter Bill", "5x Multiplier",250000000,5,5,{},{}),
+	
+	6 : new upgrade (6, "Spooktacular", "10x Multiplier",1000000000,10,10,{},{})
 
 }
 
