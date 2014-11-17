@@ -461,11 +461,11 @@ function load()
 	gameUpdate();
 };
 
-function buy(item, ten, hundred)
+function buy(item, ten, hundred, thousand)
 {
 	if( item != null && item != undefined)
 	{
-		var n = (ten ? 10:hundred ? 100: 1)
+		var n = (ten ? 10:hundred ? 100: thousand ? 100:1)
 		var count = 0;
 		var cost = 0;
 		for (var i = 0; i < n; i++) {
@@ -910,10 +910,10 @@ window.addEventListener('load',function(){
 		buy("jackOLantern", e.ctrlKey,e.shiftKey);
 
 	}, false);
-	document.getElementById("skellingtonsShop").addEventListener("click", function(e){buy("skellingtons",e.ctrlKey,e.shiftKey);}, false);
-	document.getElementById("spookySpidersShop").addEventListener("click", function(e){buy("spookySpiders",e.ctrlKey,e.shiftKey);}, false);
-	document.getElementById("ectoplasmShop").addEventListener("click", function(e){buy("ectoplasm",e.ctrlKey,e.shiftKey);}, false);
-	document.getElementById("hauntedHouseShop").addEventListener("click", function(e){buy("hauntedHouse",e.ctrlKey,e.shiftKey);}, false);
+	document.getElementById("skellingtonsShop").addEventListener("click", function(e){buy("skellingtons",e.ctrlKey,e.shiftKey, e.altKey);}, false);
+	document.getElementById("spookySpidersShop").addEventListener("click", function(e){buy("spookySpiders",e.ctrlKey,e.shiftKey, e.altKey);}, false);
+	document.getElementById("ectoplasmShop").addEventListener("click", function(e){buy("ectoplasm",e.ctrlKey,e.shiftKey, e.altKey);}, false);
+	document.getElementById("hauntedHouseShop").addEventListener("click", function(e){buy("hauntedHouse",e.ctrlKey,e.shiftKey, e.altKey);}, false);
 	document.getElementById("spookyBill").addEventListener("mousedown", spookies);
 	document.getElementById("settingsButton").addEventListener("click", function(){settings()}, false);
 	document.getElementById("achievementButton").addEventListener("click", function(){showAchieves()}, false);
