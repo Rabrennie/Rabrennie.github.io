@@ -910,7 +910,7 @@ window.addEventListener('load',function(){
 		buy("jackOLantern", e.ctrlKey,e.shiftKey);
 
 	}, false);
-	document.getElementById("skellingtonsShop").addEventListener("click", function(e){console.log(e);buy("skellingtons",e.ctrlKey,e.shiftKey, e.altKey);}, false);
+	document.getElementById("skellingtonsShop").addEventListener("click", function(e){buy("skellingtons",e.ctrlKey,e.shiftKey, e.altKey);}, false);
 	document.getElementById("spookySpidersShop").addEventListener("click", function(e){buy("spookySpiders",e.ctrlKey,e.shiftKey, e.altKey);}, false);
 	document.getElementById("ectoplasmShop").addEventListener("click", function(e){buy("ectoplasm",e.ctrlKey,e.shiftKey, e.altKey);}, false);
 	document.getElementById("hauntedHouseShop").addEventListener("click", function(e){buy("hauntedHouse",e.ctrlKey,e.shiftKey, e.altKey);}, false);
