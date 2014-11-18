@@ -572,8 +572,10 @@ function displayUpdate()
 	document.getElementById("spookiesCount").innerHTML = prettyNumbers(spookieCount);
 	document.getElementById("spookiesCount").title=Math.floor(spookieCount) + " Spookies"
 
-	document.getElementById("spookiesPerSecondCount").innerHTML = sps;
-	document.getElementById("spookiesPerClickCount").innerHTML = multiplier;
+	document.getElementById("spookiesPerSecondCount").innerHTML = prettyNumbers(sps);
+	document.getElementById("spookiesPerSecondCount").title=sps;
+	document.getElementById("spookiesPerClickCount").innerHTML = prettyNumbers(multiplier);
+	document.getElementById("spookiesPerClickCount").title=multiplier;
 	
 	document.getElementById("totalSpookiesCount").innerHTML = prettyNumbers(totalSpookies);
 	document.getElementById("totalSpookiesCount").title=Math.floor(totalSpookies) + " Spookies"
