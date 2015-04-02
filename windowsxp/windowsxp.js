@@ -85,7 +85,7 @@ window.windowsxp = (function () {
 		div.innerHTML = div.innerHTML+ content;
 		this.on(div.childNodes[0], "mousemove" , function(e){
 
-			console.log(e)
+			
 			if (e.which == 1)
 			{
 				e.path[1].style.left=parseInt(e.path[1].style.left.split("p")[0]) +e.webkitMovementX +"px"
