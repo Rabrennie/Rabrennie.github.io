@@ -23,7 +23,7 @@ window.windowsxp = (function () {
 	}
 
 	WindowsXP.prototype.setBG = function() {
-		document.body.style.backgroundImage = "url('background.jpg')";
+		document.body.style.backgroundImage = "url('img/background.jpg')";
 		return this;
 	};
 
@@ -44,8 +44,8 @@ window.windowsxp = (function () {
 		s.margin = 0;
 		s.padding = 0;
 		
-		titleControl.innerHTML = '<img src="iconmin.png"><img src="iconmax.png"><img src="iconclose.png">'
-		titleBar.innerHTML = '<img src="icondrive.png"> ' + title ;
+		titleControl.innerHTML = '<img src="img/iconmin.png"><img src="img/iconmax.png"><img src="img/iconclose.png">'
+		titleBar.innerHTML = '<img src="img/icondrive.png"> ' + title ;
 		s.position = "fixed";
 		s.backgroundColor = "#ffffff";
 		s.width = w+"px";
@@ -58,7 +58,7 @@ window.windowsxp = (function () {
 		s.fontFamily = "MS Sans Serif, Verdana, Segoe, sans-serif";;
 
 		//ts.backgroundColor = "#0355e5"
-		ts.backgroundImage = "url('titlebg.jpeg')";
+		ts.backgroundImage = "url('img/titlebg.jpeg')";
 		ts.backgroundRepeat="repeat-x";
 		ts.height = "30px";
 		ts.padding = "2px 2px 0px 0px";

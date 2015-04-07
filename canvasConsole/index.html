@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Console Experiment</title>
+		
+		<style>
+
+		#canvasConsoleInputBox
+		{
+			position: fixed;
+			top: 11px;
+			left: 11px;
+			z-index: -19;
+		}
+		#c
+		{
+			position: fixed;
+			top: 10px;
+			left: 10px;
+			z-index: 1;
+		}
+		</style>
+	</head>
+	<body>
+		<canvas id="c" width="300" height="300"></canvas>
+			
+		<script src="canvasConsole.js"></script>
+		<script>
+
+			var c = document.getElementById('c');
+			var ctx = c.getContext("2d")
+			var cc = canvasconsole.init(c,ctx);
+
+			cc.newCommand("test", function(s){console.log(s)})
+
+			var render = function()
+			{
+				this.ctx.fillStyle = "rgba(255,255,255,1)"
+				this.ctx.fillRect(0,0, c.width, c.height)
+				cc.render()
+			}
+
+			window.setInterval(render, 33)
+		</script>
+	</body>
+</html>
