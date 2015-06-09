@@ -1,0 +1,43 @@
+input["commands"] =
+{
+		"help":
+		{
+			"args":null,
+			"callback":helpDisplay
+		},
+		"echo":
+		{
+			"args":1,
+			"callback":echoCmd
+		},
+		"list":
+		{
+			"args":null,
+			"callback":listCmd
+		},
+		"cd":
+		{
+			"args":1,
+			"callback":cdCmd
+		},
+		"loading":
+		{
+			"args":null,
+			"callback":loadingTest
+		},
+		"uncorrupter":
+		{
+			"args":1,
+			"callback":unCorruptCmd
+		},
+		"clear":
+		{
+			"args":null,
+			"callback":clearCmd
+		},
+		"credits":
+		{
+			"args":null,
+			"callback": creditsCmd
+		}
+}

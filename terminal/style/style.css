@@ -1,0 +1,43 @@
+body
+{
+	color: white;
+	background: #000;
+	padding-bottom: 50px;
+	font-family: 'Inconsolata' ;
+}
+input
+{
+	border:none;
+	color: white;
+	width:70%;
+	background: #000;
+}
+textarea:focus, input:focus
+{
+	outline: 0;
+}
+input[type="text"]
+{
+	font-family: 'Inconsolata';
+	font-size: medium;
+}
+a
+{
+	color:white;
+}
+#output
+{
+	height:70vh;
+	overflow-y: scroll;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #000000;
+}
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #FFF;
+  border-radius: 50px;
+}

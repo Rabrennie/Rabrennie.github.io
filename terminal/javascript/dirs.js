@@ -1,0 +1,39 @@
+var dir = 
+{
+	"root":
+	{
+		"files":["test.txt"],
+		"dirs":["test","home","documents","secrets"],
+		"parent":"root"
+	},
+	"test":
+	{
+		"files":["test2.txt"],
+		"dirs":[],
+		"parent":"root"
+	},
+	"home":
+	{
+		"files":[""],
+		"dirs":[""],
+		"parent":"root"	
+	},
+	"documents":
+	{
+		"files":[""],
+		"dirs":["downloads"],
+		"parent":"root"	
+	},
+	"secrets":
+	{
+		"files":[""],
+		"dirs":[""],
+		"parent":"root"	
+	},
+	"downloads":
+	{
+		"files":[""],
+		"dirs":[""],
+		"parent":"documents"	
+	},
+}
