@@ -10,7 +10,7 @@ input["commands"] =
 			"args":1,
 			"callback":echoCmd
 		},
-		"list":
+		"ls":
 		{
 			"args":null,
 			"callback":listCmd
