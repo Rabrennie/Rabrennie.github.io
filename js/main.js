@@ -76,12 +76,50 @@ function deviceScanInit()
 function showCommands()
 {
     $("#output").append("<p>help    - Show this help</p>");
-    $("#output").append("<p>project - Show projects I've worked on</p>");
+    $("#output").append("<p>projects - Show projects I've worked on</p>");
     $("#output").append("<p>github  - Open My Github Page</p>");
     $("#output").append("<p>twitter - Open My Twitter Page</p>");
     $("#output").append("<p>reddit  - Open My Reddit Page</p>");
     $("#output").append("<p>steam   - Open My Steam Page</p><br />");
     $("#inputContainer").css("visibility","visible")
+    $('#i')[0].focus();
 }
+
+function inputHandler(s)
+{
+    if (s != "")
+    {
+        $("#output").append("<p>> "+s+"</p>");
+        switch (s)
+        {
+            case "help":
+                showCommands();
+                break;
+            case "github":
+                $("#output").append("<p>Opening https://github.com/Rabrennie</p><br />");
+                window.open("https://github.com/Rabrennie");
+                break;
+            default: $("#output").append("<p>Unknown Command</p>");
+        }
+    }
+}
+
+$( "#i" ).keypress(function(e)
+{
+	if (e.keyCode == 13)
+	{
+		inputHandler(this.value);
+		this.value = "";
+	};
+});
+
+//keeps focus on input element
+var el = $('#i')[0];
+el.focus();
+el.onblur = function () {
+    setTimeout(function () {
+        el.focus();
+    });
+};
 
 memoryTestInit();
