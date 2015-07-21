@@ -80,7 +80,7 @@ function showCommands()
     $("#output").append("<p>github  - Open My Github Page</p>");
     $("#output").append("<p>twitter - Open My Twitter Page</p>");
     $("#output").append("<p>reddit  - Open My Reddit Page</p>");
-    $("#output").append("<p>Steam   - Open My Steam Page</p><br />");
+    $("#output").append("<p>steam   - Open My Steam Page</p><br />");
     $("#inputContainer").css("visibility","visible")
 }
 
