@@ -75,7 +75,9 @@ function deviceScanInit()
 
 function showCommands()
 {
+    $("#output").append("<p><b>Commands</b></p>");
     $("#output").append("<p>help    - Show this help</p>");
+    $("#output").append("<p>about    - Some information about me</p>");
     $("#output").append("<p>projects - Show projects I've worked on</p>");
     $("#output").append("<p>github  - Open My Github Page</p>");
     $("#output").append("<p>twitter - Open My Twitter Page</p>");
@@ -85,6 +87,41 @@ function showCommands()
     $('#i')[0].focus();
 }
 
+function showProjects()
+{
+    $("#output").append("<p><b>ChromeBait</b> - <<a href='https://github.com/Rabrennie/ChromeBait'>https://github.com/Rabrennie/ChromeBait</a>></p>");
+    $("#output").append("<p>- A chrome extension that turns the clickbait dial to 11.</p><br />");
+    $("#output").append("<p><b>Spookie Clicker</b> - <<a href='http://rabrennie.com/spookies'>http://rabrennie.com/spookies</a>></p>");
+    $("#output").append("<p>- A Small incremental game about Bill Murray, Spiders and Spooky Skellingtons</p><br />");
+}
+function showInfo()
+{
+    $("#output").append("<p>Hi, I am a 17 year old Software Development Student in Scotland. You can find my projects on github. You can contact me through email at rennierab@gmail.com or through any of the sites I have provided links for.</p><br />");
+}
+function openURL(url)
+{
+    $("#output").append("<p>Opening "+url+"</p><br />");
+    window.open(url);
+}
+function showSkellington()
+{
+    $("#output").append("<p>▒▒▒░░░░░░░░░░▄▐░░░░</p>");
+    $("#output").append("<p>▒░░░░░░▄▄▄░░▄██▄░░░</p>");
+    $("#output").append("<p>░░░░░░▐▀█▀▌░░░░▀█▄░</p>");
+    $("#output").append("<p>░░░░░░▐█▄█▌░░░░░░▀█▄</p>");
+    $("#output").append("<p>░░░░░░░▀▄▀░░░▄▄▄▄▄▀▀</p>");
+    $("#output").append("<p>░░░░░▄▄▄██▀▀▀▀░░░░░</p>");
+    $("#output").append("<p>░░░░█▀▄▄▄█░▀▀░░░░░░</p>");
+    $("#output").append("<p>░░░░▌░▄▄▄▐▌▀▀▀░░░░░</p>");
+    $("#output").append("<p>░▄░▐░░░▄▄░█░▀▀░░░░░</p>");
+    $("#output").append("<p>░▀█▌░░░▄░▀█▀░▀░░░░░</p>");
+    $("#output").append("<p>░░░░░░░░▄▄▐▌▄▄░░░░░</p>");
+    $("#output").append("<p>░░░░░░░░▀███▀█░▄░░░</p>");
+    $("#output").append("<p>░░░░░░░▐▌▀▄▀▄▀▐▄░░░</p>");
+    $("#output").append("<p>░░░░░░░▐▀░░░░░░▐▌░░</p>");
+    $("#output").append("<p>░░░░░░░█░░░░░░░░█░░</p>");
+    $("#output").append("<p>░░░░░░▐▌░░░░░░░░░█░ </p><br />");
+}
 function inputHandler(s)
 {
     if (s != "")
@@ -95,9 +132,26 @@ function inputHandler(s)
             case "help":
                 showCommands();
                 break;
+            case "about":
+                showInfo();
+                break;
             case "github":
-                $("#output").append("<p>Opening https://github.com/Rabrennie</p><br />");
-                window.open("https://github.com/Rabrennie");
+                openURL("https://github.com/Rabrennie");
+                break;
+            case "twitter":
+                openURL("https://twitter.com/SpookyCo");
+                break;
+            case "reddit":
+                openURL("https://www.reddit.com/user/SpookyCo/");
+                break;
+            case "steam":
+                openURL("http://steamcommunity.com/id/spookyco");
+                break;
+            case "projects":
+                showProjects();
+                break;
+            case "spooky":
+                showSkellington();
                 break;
             default: $("#output").append("<p>Unknown Command</p>");
         }

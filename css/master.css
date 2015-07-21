@@ -8,10 +8,16 @@ body
 {
   font-size: 17px;
 }
-p
+#output p
 {
     margin: 0;
     padding: 0;
+    max-width: 500px;
+}
+#output p a
+{
+    color:#FCFCFC;
+    text-decoration: underline;
 }
 #inputContainer
 {
