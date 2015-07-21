@@ -8,3 +8,25 @@ body
 {
   font-size: 17px;
 }
+p
+{
+    margin: 0;
+    padding: 0;
+}
+#inputContainer
+{
+    visibility: hidden;
+}
+#inputContainer input
+{
+    background-color: #212121;
+    border:none;
+    margin-left: 10px;
+    color: #FCFCFC;
+    font-family: 'Inconsolata';
+    font-size: 17px;
+}
+textarea:focus, input:focus
+{
+	outline: 0;
+}

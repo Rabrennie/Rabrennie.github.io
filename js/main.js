@@ -18,6 +18,7 @@ function memoryTestInit()
         else
         {
             $("#memoryTest").append(" OK");
+            $("#output").append("<br />");
             deviceScanInit();
         };
     }
@@ -31,6 +32,8 @@ function deviceScanInit()
         devices = ["USB", "Keyboard", "Mouse"],
         current = 0,
         dots = 0;
+
+    $("#output").append("<p><b>Scanning For Devices</b></p>");
 
     function scanDevices()
     {
@@ -59,9 +62,26 @@ function deviceScanInit()
                 current++
                 window.setTimeout(scanDevices, delay);
             }
+            else
+            {
+                $("#output").append("<br />");
+                $("#output").append("<p><h3>Welcome To SpookyOS</h3></p><br />");
+                showCommands();
+            }
         }
     }
     scanDevices();
+}
+
+function showCommands()
+{
+    $("#output").append("<p>help    - Show this help</p>");
+    $("#output").append("<p>project - Show projects I've worked on</p>");
+    $("#output").append("<p>github  - Open My Github Page</p>");
+    $("#output").append("<p>twitter - Open My Twitter Page</p>");
+    $("#output").append("<p>reddit  - Open My Reddit Page</p>");
+    $("#output").append("<p>Steam   - Open My Steam Page</p><br />");
+    $("#inputContainer").css("visibility","visible")
 }
 
 memoryTestInit();
