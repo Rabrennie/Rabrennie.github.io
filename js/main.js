@@ -29,7 +29,7 @@ function memoryTestInit()
 function randomStuff()
 {
     var delay = 300,
-        strings = ["Setting parameters of disk 1", "Loading kernel Modules","Cleaning up temporary files","Scanning For Devices","Waiting for devices to settle","<br /> Starting Spooky OS"],
+        strings = ["Setting parameters of disk 1", "Loading kernel modules","Cleaning up temporary files","Scanning for devices","Waiting for devices to settle","<br /> Starting SpookyOS"],
         current = 0,
         dots = 0;
 
