@@ -36,3 +36,14 @@ textarea:focus, input:focus
 {
 	outline: 0;
 }
+
+h3 h5
+{
+    margin: 0;
+    padding: 0;
+}
+
+h5
+{
+    font-weight: normal;
+}

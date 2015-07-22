@@ -19,60 +19,64 @@ function memoryTestInit()
         {
             $("#memoryTest").append(" OK");
             $("#output").append("<br />");
-            deviceScanInit();
+            randomStuff();
         };
     }
 
     updateMemory();
 }
 
-function deviceScanInit()
+function randomStuff()
 {
     var delay = 300,
-        devices = ["USB", "Keyboard", "Mouse"],
+        strings = ["Setting parameters of disk 1", "Loading kernel Modules","Cleaning up temporary files","Scanning For Devices","Waiting for devices to settle","<br /> Starting Spooky OS"],
         current = 0,
         dots = 0;
 
-    $("#output").append("<p><b>Scanning For Devices</b></p>");
+    $("#output").append("<br />");
 
-    function scanDevices()
+    function showStuff()
     {
         var temp = "";
-        if (!$("#deviceScan"+devices[current]).length)
+        if (!$("#random"+current).length)
         {
-            $("#output").append("<p id='deviceScan"+devices[current]+ "'>Scanning for "+devices[current]+"<span id='dots"+devices[current]+"'></span></p>");
+            $("#output").append("<p id='random"+current+ "'>"+strings[current]+"<span id='dots"+current+"'></span></p>");
         }
         for (var i = 0; i < dots; i++)
         {
             //$("#dots"+devices[current]).append(".");
             temp+=".";
         }
-        $("#dots"+devices[current]).html(temp);
+        $("#dots"+current).html(temp);
         if (dots < 4)
         {
             dots++;
-            window.setTimeout(scanDevices, delay);
+            window.setTimeout(showStuff, delay+Math.random()*100-50);
         }
         else
         {
             dots = 0;
-            $("#deviceScan"+devices[current]).append("  FOUND");
-            if (current < devices.length-1)
+            $("#random"+current).append("  DONE");
+            if (current < strings.length-1)
             {
                 current++
-                window.setTimeout(scanDevices, delay);
+                window.setTimeout(showStuff, delay+Math.random()*100-50);
             }
             else
             {
-                $("#output").append("<br />");
-                $("#output").append("<p><h3>Welcome To SpookyOS</h3></p><br />");
-                showCommands();
+                window.setTimeout(spookyOs, 1000);
             }
         }
     }
-    scanDevices();
+    showStuff();
 }
-
+function spookyOs()
+{
+    $("#output").append("<br />");
+    $("#output").append("<p><h3>Welcome To SpookyOS</h3></p>");
+    $("#output").append("<p><h5>SpookyOS [Version 2.4.3600] Copyright (c) 2015 Spooky Corporation. All Rights Reserved.</h5></p>");
+    showCommands();
+}
 function showCommands()
 {
     $("#output").append("<p><b>Commands</b></p>");
