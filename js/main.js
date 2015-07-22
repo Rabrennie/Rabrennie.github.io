@@ -168,6 +168,7 @@ $( "#i" ).keypress(function(e)
 	{
 		inputHandler(this.value);
 		this.value = "";
+        $("html, body").animate({ scrollTop: $(document).height()-$(window).height()});
 	};
 });
 
