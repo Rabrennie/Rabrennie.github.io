@@ -1,11 +1,38 @@
-function memoryTestInit()
+function biosTestInit()
 {
     var delay = 33,
         step = 648,
         curMemory = 0,
-        memory = 26732;
+        memory = 26732,
+        counter = 0,
+        lines = ["SpookyBIOS V2.42 (c) 2015 Spooky Corporation.",
+                "BIOS Date : 22/07/2015, 20:05:45",
+                "<br />",
+                "Main Processor : Qualvidia III 2GHz",
+                "CPU Power : 1.21 Jiggawatts",
+                "<br />",
+                "Total Memory : 27216K"];
 
-    $("#output").append("<p id='memoryTest'>Memory Test : <span id='memoryTestNumber'>0K</span></p>");
+    function printLines()
+    {
+
+        $("#output").append("<p>"+lines[counter]+"</p>");
+        if (counter < lines.length-1)
+        {
+            counter++
+            window.setTimeout(printLines, 300);
+        }
+        else
+        {
+            window.setTimeout(initMemory, 300);
+        };
+    }
+
+    function initMemory()
+    {
+        $("#output").append("<p id='memoryTest'>Memory Test : <span id='memoryTestNumber'>0K</span></p>");
+        updateMemory();
+    }
 
     function updateMemory()
     {
@@ -19,11 +46,18 @@ function memoryTestInit()
         {
             $("#memoryTest").append(" OK");
             $("#output").append("<br />");
-            randomStuff();
+
+            window.setTimeout(function(){clearScreen(randomStuff);}, 500);
         };
     }
 
-    updateMemory();
+    printLines();
+}
+
+function clearScreen(callback)
+{
+    $("#output").html("");
+    callback();
 }
 
 function randomStuff()
@@ -33,7 +67,6 @@ function randomStuff()
         current = 0,
         dots = 0;
 
-    $("#output").append("<br />");
 
     function showStuff()
     {
@@ -64,7 +97,7 @@ function randomStuff()
             }
             else
             {
-                window.setTimeout(spookyOs, 1000);
+                window.setTimeout(function(){clearScreen(spookyOs);}, 500);
             }
         }
     }
@@ -72,7 +105,6 @@ function randomStuff()
 }
 function spookyOs()
 {
-    $("#output").append("<br />");
     $("#output").append("<p><h3>Welcome To SpookyOS</h3></p>");
     $("#output").append("<p><h5>SpookyOS [Version 2.4.3600] Copyright (c) 2015 Spooky Corporation. All Rights Reserved.</h5></p>");
     showCommands();
@@ -181,4 +213,4 @@ el.onblur = function () {
     });
 };
 
-memoryTestInit();
+biosTestInit();
