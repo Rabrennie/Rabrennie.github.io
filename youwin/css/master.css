@@ -1,0 +1,37 @@
+body,div
+{
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.youwin{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.notifications{
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+.notifications .notification{
+    margin-bottom: 20px;
+    width:400px;
+    border: 1px solid grey;
+    padding:10px 20px;
+    cursor: pointer;
+    animation: fadein 2s;
+}
+
+.notifications .notification .title{
+    font-size: 20px;
+    margin-bottom:10px;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="ywtgapp">
+    <head>
+        <meta charset="utf-8">
+        <title>You Win: The Game</title>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        <script src="bower_components\angular\angular.min.js" charset="utf-8"></script>
+        <script src="js/app.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body ng-controller="ywtgController">
+        <div class="youwin">
+            {{youwin}}
+        </div>
+        <div class="notifications">
+            <notification ng-repeat="item in notifications" notification-title="{{item.title}}" notification-desc="{{item.desc}}" ng-click="notifications.splice($index,1)"></notification>
+        </div>
+        {{counter}}
+    </body>
+</html>
