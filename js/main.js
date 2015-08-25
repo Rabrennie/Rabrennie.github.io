@@ -125,6 +125,8 @@ function showCommands()
 
 function showProjects()
 {
+    $("#output").append("<p><b>You Win: The Game</b> - <<a href='http://rabrennie.com/youwin/'>http://rabrennie.com/youwin/</a>></p>");
+    $("#output").append("<p>- A small idle game about winning</p><br />");
     $("#output").append("<p><b>ChromeBait</b> - <<a href='https://github.com/Rabrennie/ChromeBait'>https://github.com/Rabrennie/ChromeBait</a>></p>");
     $("#output").append("<p>- A chrome extension that turns the clickbait dial to 11.</p><br />");
     $("#output").append("<p><b>Spookie Clicker</b> - <<a href='http://rabrennie.com/spookies'>http://rabrennie.com/spookies</a>></p>");
