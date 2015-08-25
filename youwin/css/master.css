@@ -28,7 +28,7 @@ body,div
 .notifications .notification{
     margin-bottom: 20px;
     width:400px;
-    border: 1px solid black;
+    border: 1px solid grey;
     padding:10px 20px;
     cursor: pointer;
     animation: fadein 2s;
