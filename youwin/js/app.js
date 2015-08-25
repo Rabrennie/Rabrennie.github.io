@@ -22,15 +22,14 @@ var ywtgapp = angular.module("ywtgapp",[])
         $scope.notifications = [];
         $scope.achieved = {};
 
-
         //Save Handling
-        if (save.achieved) {
+        if (save) {
             $scope.achieved = save.achieved;
         }
-        if (save.counter){
+        if (save){
             $scope.counter = save.counter;
         }
-        if (save.date)
+        if (save)
         {
             $scope.counter += Math.ceil((new Date().getTime() - save.date)/1000);
             for (var key in achievements) {
