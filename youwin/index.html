@@ -15,6 +15,36 @@
         <div class="notifications">
             <notification ng-repeat="item in notifications" notification-title="{{item.title}}" notification-desc="{{item.desc}}" ng-click="notifications.splice($index,1)"></notification>
         </div>
-        {{counter}}
+        <div class="counter">
+            {{counter}}
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="#" ng-click="toggleAchievementModal()">Achievements</a></li>
+                <li><a href="#" ng-click="toggleAboutModal()">About</a></li>
+            </ul>
+        </div>
+        <div class="modal-back" ng-show="achievementModalShow"
+        ng-click="toggleAchievementModal()">
+            <div class="modal" style="height: 50%;">
+                <div class="modal-title">
+                    Achievements
+                </div>
+                <ul>
+                    <li ng-repeat="item in achieved">{{item.title}}<br />{{item.desc}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal-back" ng-show="aboutModalShow"
+        ng-click="toggleAboutModal()">
+            <div class="modal">
+                <div class="modal-title">
+                    About
+                </div>
+                <div class="modal-content">A simple little idle game made by Rab Rennie
+                <p>You can find my other projects <a href="http://rabrennie.com/">Here</a><p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

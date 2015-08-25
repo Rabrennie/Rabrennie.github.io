@@ -3,6 +3,13 @@ body,div
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
 }
 
 .youwin{
@@ -10,6 +17,7 @@ body,div
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: default;
 }
 .notifications{
     position: absolute;
@@ -24,11 +32,73 @@ body,div
     padding:10px 20px;
     cursor: pointer;
     animation: fadein 2s;
+    background-color: white;
 }
 
 .notifications .notification .title{
     font-size: 20px;
     margin-bottom:10px;
+}
+.menu{
+    position: absolute;
+    right:0px;
+    top:0px;
+}
+.menu ul li
+{
+    display: inline-block;
+    margin: 0 20px;
+    padding:0px;
+}
+.menu ul li a{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+.menu ul li a:visited{
+    color: black;
+}
+.counter{
+    margin:15px 20px;
+    cursor: default;
+}
+.modal-back{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.5);;
+}
+.modal{
+    position: absolute;
+    border:1px solid grey;
+    background-color: white;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: default;
+}
+
+.modal ul{
+    padding:0;
+    margin: 0;
+}
+.modal .modal-title{
+    padding:20px;
+    border-bottom:1px solid grey;
+    font-size:18px;
+}
+.modal ul li{
+    display:block;
+    background-color:#DDDDDD;
+    height:50px;
+    padding:20px;
+}
+
+.modal .modal-content{
+    padding:20px;
 }
 
 @keyframes fadein {

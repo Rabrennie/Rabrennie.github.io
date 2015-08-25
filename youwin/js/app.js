@@ -12,10 +12,12 @@ var ywtgapp = angular.module("ywtgapp",[])
             250:"You lose!",
             300:"Just kidding, you win again!"
         }
-
+        $scope.achievementModalShow = false;
+        $scope.aboutModalShow = false;
         $scope.youwin="You win!";
         $scope.counter=0;
         $scope.notifications = [];
+        $scope.achieved = [];
 
         $scope.gameLoop = function(){
             $scope.counter++;
@@ -24,7 +26,17 @@ var ywtgapp = angular.module("ywtgapp",[])
             };
             if (achievements[$scope.counter]) {
                 $scope.notifications.push(achievements[$scope.counter]);
+                $scope.achieved.push(achievements[$scope.counter]);
             };
+        }
+
+        $scope.toggleAchievementModal = function()
+        {
+            $scope.achievementModalShow = !$scope.achievementModalShow;
+        }
+        $scope.toggleAboutModal = function()
+        {
+            $scope.aboutModalShow = !$scope.aboutModalShow;
         }
 
         $interval($scope.gameLoop, 1000);
