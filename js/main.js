@@ -134,7 +134,7 @@ function showProjects()
 }
 function showInfo()
 {
-    $("#output").append("<p>Hi, I am a 17 year old Software Development Student in Scotland. You can find my projects on github. You can contact me through email at rennierab@gmail.com or through any of the sites I have provided links for.</p><br />");
+    $("#output").append("<p>Hi, I am a 18 year old Software Development Student in Scotland. You can find my projects on github. You can contact me through email at rennierab@gmail.com or through any of the sites I have provided links for.</p><br />");
 }
 function openURL(url)
 {
