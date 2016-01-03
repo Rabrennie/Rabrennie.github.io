@@ -47,6 +47,10 @@ function biosTestInit()
 
     function updateMemory()
     {
+      if(skip) {
+        clearScreen(spookyOs);
+        return
+      }
         curMemory += step;
         $("#memoryTestNumber").html(curMemory+"K");
         if (curMemory < memory)
