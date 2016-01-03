@@ -1,3 +1,10 @@
+var skip = false;
+$(window).on('keypress', function(e) {
+  if(e.keyCode == 13) {
+    skip = true;
+  }
+});
+
 function biosTestInit()
 {
     var delay = 33,
@@ -15,6 +22,10 @@ function biosTestInit()
 
     function printLines()
     {
+        if(skip) {
+          clearScreen(spookyOs);
+          return
+        }
 
         $("#output").append("<p>"+lines[counter]+"</p>");
         if (counter < lines.length-1)
@@ -70,6 +81,11 @@ function randomStuff()
 
     function showStuff()
     {
+      if(skip) {
+        clearScreen(spookyOs);
+        return
+      }
+
         var temp = "";
         if (!$("#random"+current).length)
         {
@@ -105,6 +121,7 @@ function randomStuff()
 }
 function spookyOs()
 {
+    $("#skip").hide();
     $("#output").append("<p><h3>Welcome To SpookyOS</h3></p>");
     $("#output").append("<p><h5>SpookyOS [Version 2.4.3600] Copyright (c) 2015 Spooky Corporation. All Rights Reserved.</h5></p>");
     showCommands();
