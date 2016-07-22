@@ -81,7 +81,6 @@ function open(el_class) {
 		} else {
 			document.querySelector(`#${item}_link`).className = 'current';
 		}
-
 	}
 }
 
@@ -95,6 +94,21 @@ function scrolled(e){
 	if(window._TO) {
 		clearTimeout(window._TO);
 	}
+
+    var height = Math.max(document.documentElement.clientHeight, window.innerHeight)/2;
+
+    if (checkVisible(menuItems.about, height, 'above')) {
+        changeLink('projects');
+    } else {
+        changeLink('about');
+    }
+    if (checkVisible(menuItems.projects, height, 'above')) {
+        changeLink('blog');
+    }
+    if (checkVisible(menuItems.blog, height, 'above')) {
+        changeLink('contact');
+    }
+
 }
 
 function scrollToItem(item) {
@@ -112,4 +126,26 @@ function scrollToItem(item) {
 
 function changeHash(value) {
 	history.replaceState(undefined, undefined, "#" + value);
+}
+
+function checkVisible(elm, threshold, mode) {
+  threshold = threshold || 0;
+  mode = mode || 'visible';
+
+  var rect = elm.getBoundingClientRect();
+  var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+  var above = rect.bottom - threshold < 0;
+  var below = rect.top - viewHeight + threshold >= 0;
+
+  return mode === 'above' ? above : (mode === 'below' ? below : !above && !below);
+}
+
+function changeLink(current) {
+    for(var item in menuItems) {
+		if(item != current) {
+			document.querySelector(`#${item}_link`).className = '';
+		} else {
+			document.querySelector(`#${item}_link`).className = 'current';
+		}
+	}
 }
