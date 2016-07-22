@@ -1,0 +1,76 @@
+doctype html
+html(lang="en")
+    head
+        script(src="https://cdn.rawgit.com/Rabrennie/best-route/master/BestRoute.min.js")
+        link(href="https://fonts.googleapis.com/css?family=Inconsolata:700|Oxygen+Mono|Scope+One" rel="stylesheet")
+    body
+        .left
+            .menu
+                a(id="about_link" class="current") About
+                a(id="projects_link") Projects
+                a(id="blog_link") Blog
+                a(id="contact_link") Contact
+            .close
+        .right
+            .about
+                h1 About Me
+                p My name is
+                    span  Rab Rennie
+                p	I am a
+                    span  Web Developer
+                p I make
+                    span  Stuff
+            .projects
+                h1 Projects
+
+                .project
+                    h2
+                        a(href="https://chrome.google.com/webstore/detail/play-genius/khlghnjfjflnecmoildkjfoaenhgnegm") Play Genius
+                    .desc
+                        img(src="http://i.imgur.com/TsjRk2G.png", alt="")
+                        p
+                            | Play Genius is a chrome extension that adds a lyrics button next to the queue button in Google Play Music.
+                        .break
+                        p
+                            |Lyrics from Genius.com open in google play music and allow you to click on annotated lyrics to view their meaning.
+                    .line
+
+                .project
+                    h2
+                        a(href="http://rabrennie.com/Simplicity") Simplicity
+                    .desc
+                        img(src="http://i.imgur.com/1MfgoD4.png", alt="")
+                        p
+                            | Simplicity is a minimalistic 3d puzzle game.
+                        .break
+                        p
+                            | You play as a cube who has to get to the goal tile in the least number of steps possible. There are multiple types of obstacles.
+                    .line
+
+                .project
+                    h2
+                        a(href="http://rekt.me") Rekt.me
+                    .desc
+                        img(src="http://i.imgur.com/BO6tyne.png", alt="")
+                        p
+                            | Rekt.me is an api service that provides various rekt phrases such as:
+                        .break
+                        p "The Wolf of REKT Street"
+                        br
+                        p "No Country For REKT Men"
+                        br
+                        p and my favourite: "Uncaught REKTError: REKT is not defined"
+
+
+            .blog
+                h1 Blog
+                h2 Coming Soon &trade;
+            .contact
+                h1 Contact
+                a(href="https://twitter.com/spookyco") Twitter
+                a(href="https://twitter.com/spookyco") Twitter
+                a(href="mailto:rennierab@gmail.com") Email
+                a(href="http://codepen.io/Rabrennie") Codepen
+                a(href="https://www.reddit.com/user/SpookyCo/") Reddit
+                a(href="http://rabrennie.com/resume") Resume
+        .hamburger
