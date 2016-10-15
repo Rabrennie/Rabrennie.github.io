@@ -1,286 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+$width: 1200px;
+$height: 600px;
+$bar-height: 30px;
+
 body {
-	font-family: 'Inconsolata', monospace;
-	overflow-x: hidden;
-	background: #DCD571;
+	background: #ced4da;
+  font-size: 1.5em;
+  overflow: hidden;
 }
 
-.left, .right {
+.window {
 	position: absolute;
-	min-height: 100%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: $width;
+	height: $height;
+	background: #212529;
+	box-shadow: 5px 5px 20px 0px rgba(52, 58, 64, 1);
 
-	transition: all 300ms;
+  animation: 1000ms scale-out forwards;
 }
 
-@media only screen and (max-width: 767px) and (orientation: portrait) {
-	body {
-		font-size: 70%;
-	}
-    .left {
-			width: 100% !important;
-		}
-
-	.right {
-		p {
-				margin: 2em !important;
-			}
-		a {
-			margin: 1em 2em !important;
-		}
-
-		.project {
-			.desc {
-				position: relative;
-				padding: 0 5em;
-			}
-			img {
-				margin: 0 auto;
-				float: none;
-				display: block !important;
-			}
-			p {
-				display: block !important;
-				text-align: center;
-				margin: 1em 0 !important;
-				font-size: 1.5em !important;
-			}
-		}
-	}
+.window .bar {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: $bar-height;
+	background: #f8f9fa;
+   &:before {
+     content: "// Rab Rennie";
+     font-family: 'Inconsolata', monospace;
+     color: #212529;
+     font-size: 0.8em;
+     line-height: 1.5em;
+     margin-left: 1em;
+   }
 }
 
-@media only screen and (max-width: 1000px) and (orientation: landscape) {
-    .left {
-			width: 100% !important;
-		}
-
-	.right {
-		p {
-				margin: 1em 2em !important;
-			}
-		a {
-			margin: 1em 2em !important;
-		}
-	}
-}
-
-
-.left {
-	position: fixed;
-	background: #DCD571;
-	z-index: 1000;
-
-	width: 30%;
-
-	&.closed {
-		transform: translateX(-100%);
-
-		& + .right{
-			width: 100%;
-			transform: translateX(-30%);
-
-
-
-			& + .hamburger {
-				display: block !important;
-			}
-		}
-	}
-
-	.menu {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-
-		transform: translate(-50%, -50%);
-
-		a {
-			position: relative;
-			display: block;
-			text-align: center;
-			padding: 20px;
-			width: 8em;
-			text-decoration: none;
-			font-size: 1.5em;
-			color: #163B47;
-			font-weight: bold;
-			cursor: pointer;
-
-			&:after, &:before {
-				position: absolute;
-				display: block;
-				content: " ";
-				width: 1px;
-				height: 1em;
-				top: 50%;
-				transform: translateY(-50%) rotateZ(0deg);
-				-webkit-transform-origin: 50%  51%;
-				transition: transform 300ms;
-				border-right: 1px solid black;
-			}
-
-			&:after {
-				left: 0;
-
-			}
-
-			&:before {
-				right:0;
-
-			}
-
-			&.current:after {
-				transform: translateY(-50%) rotateZ(-90deg);
-			}
-
-			&.current:before {
-				transform: translateY(-50%) rotateZ(90deg);
-			}
-		}
-	}
-}
-
-.right {
-	left:30%;
-	background: #F06655;
-	width: 70%;
-
-
-	.about, .projects, .blog, .contact {
-		width: 100%;
-		min-height: 100vh;
-		border-bottom: 5px solid rgba(0,0,0,0.2);
-
-		text-align: center;
-
-		h1 {
-			display: block;
-			color: #FFFFFF;
-			font-size: 3.5em;
-			margin: 40px;
-			text-align: center;
-		}
-
-		a {
-			display: block;
-			font-size: 2em;
-			color: white;
-			text-decoration: none;
-			margin: 3em 5em;
-		}
-
-		p {
-			margin: 5em 5em;
-			font-size: 2em;
-			color: rgba(255,255,255, 0.5);
-
-
-			span {
-				font-weight: bolder;
-				color: #ffffff;
-			}
-		}
-	}
-}
-
-.close {
-  position: absolute;
-  right: 32px;
-  top: 32px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
-	cursor: pointer;
-}
-.close:hover {
-  opacity: 1;
-}
-.close:before, .close:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 33px;
-  width: 2px;
-  background-color: #333;
-}
-.close:before {
-  transform: rotate(45deg);
-}
-.close:after {
-  transform: rotate(-45deg);
-}
-
-.hamburger {
-	display:none;
-	position: fixed;
-	top: 32px;
-	left: 32px;
-	height: 20px;
-	width: 33px;
-	border-top: 4px solid #333;
-	border-bottom: 4px solid #333;
-	opacity: 0.3;
-	cursor: pointer;
-
-	&:after {
-		display: block;
-		position: relative;
-		content: " ";
-		border-top: 4px solid #333;
-		width: 33px;
-		height: 1px;
-
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	&:hover {
-		opacity: 1;
-	}
-}
-
-
-h1 {
-	font-family: 'Scope One', serif;
-}
-
-.project {
-	h2 {
-		margin-bottom: 0em !important;
-	}
-
-	a {
-		margin: 1em !important;
-	}
-	.desc {
-		margin: 0px auto;
-		position: relative;
-		padding: 0 5em;
-		max-width: 80em;
-		min-height: 200px;
-		text-align: left;
-	}
-	img {
-		float: left;
-		margin-right: 2em;
-		margin-bottom: 1em;
-		width: 120px;
-		height: 120px;
-		border-radius: 5px;
-		border: 4px solid #fafafa;
-	}
+.window .content {
+	position: absolute;
+	bottom: 2.1em;
+	width: 100%;
+	max-height: Calc($height - 80px);
+	overflow-y: scroll;
+	overflow-x: hidden;
+	color: #f8f9fa;
+	font-family: 'Inconsolata', monospace;
 	p {
-		display: inline;
-		text-align: left;
-		margin: 0 0em !important;
-		font-size: 1.5em !important;
-	}
+		font-size: 1em;
+		margin: 5px 10px;
+		width: 100%;
+		word-wrap: break-word;
+    font-weight: 400;
 
-	.line {
-		width: 80%;
-		margin: 20px auto 0px auto;
-		border-bottom: 4px solid rgba(0,0,0,0.1);
-	}
+    a, a:visited {
+      color: #a3daff;
+      text-decoration: none;
+    }
+		&:before {
+			content: "> ";
+			color: #ffa8a8;
+			font-size: 0.9em;
+		}
 
-	.break {
-		height: 2em;
+    &.return:before {
+			content: "- ";
+			color: #ffa8a8;
+			font-size: 0.9em;
+		}
+
+    &.info:before {
+			content: "\00a0\00a0";
+			color: #ffa8a8;
+			font-size: 0.9em;
+		}
 	}
+}
+
+.window input {
+	position: absolute;
+	bottom: 10px;
+	right: 0;
+	width: Calc($width - 30px);
+	height: 1em;
+	background: none;
+	border: none;
+	font-family: 'Inconsolata', monospace;
+	color: #f8f9fa;
+	font-size: 1em;
+	&:focus {
+		outline: none;
+	}
+}
+
+.window .symbol {
+	position: absolute;
+	bottom: 10px;
+	left: 8px;
+	color: #ffa8a8;
+	font-family: 'Inconsolata', monospace;
+	font-size: 1em;
+}
+
+.window .content::-webkit-scrollbar {
+	width: 7px;
+}
+
+.window .content::-webkit-scrollbar-track {
+	background: #1d2023;
+	border-radius: 10px;
+}
+
+.window .content::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #161719;
+	height: 10px;
+}
+
+
+@keyframes scale-out {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }

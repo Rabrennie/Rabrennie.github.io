@@ -1,151 +1,52 @@
+'use strict';
+
 import '../index.jade'
 import '../sass/reset.scss'
 import '../sass/style.scss';
+import './commands/main';
+import Command from './commands/command';
 
-var scrolling = false;
-var mq = window.matchMedia( "only screen and (max-width: 767px) and (orientation: portrait)" );
+const parseArgs = require('minimist')
 
-var menuItems = {
-	about: document.querySelector('.about'),
-	projects: document.querySelector('.projects'),
-	blog: document.querySelector('.blog'),
-	contact: document.querySelector('.contact'),
+const ib = document.querySelector('input.input-box');
+const content = document.querySelector('div.content');
 
-}
+ib.focus();
 
-document.querySelector('#blog_link').addEventListener('click', () => {
-	open('blog');
-})
+ib.addEventListener('keypress', function (e) {
+	if (e.key === 'Enter') {
+    const input = ib.value;
+    printOut(input);
+    ib.value = '';
 
-document.querySelector('#projects_link').addEventListener('click', () => {
-	open('projects');
-})
+    const inputs = input.toLowerCase().split(' ');
+    const output = Command.call( inputs.shift(), parseArgs(inputs) ) ;
 
-document.querySelector('#about_link').addEventListener('click', () => {
-	open('about');
-})
-
-document.querySelector('#contact_link').addEventListener('click', () => {
-	open('contact');
-})
-
-document.querySelector('.close').addEventListener('click', ()=> {
-	document.querySelector('.left').className += " closed";
-})
-
-document.querySelector('.hamburger').addEventListener('click', ()=> {
-	document.querySelector('.left').className = 'left';
-})
-
-window.onload = () => {
-
-	BestRoute.on('/about', () => {
-		open('about');
-	});
-
-	BestRoute.on('/projects', () => {
-		open('projects');
-	});
-
-	BestRoute.on('/blog', () => {
-		open('blog');
-	});
-
-	if(window.location.hash === "") {
-		// changeHash("projects");
-	} else {
-		var hash = window.location.hash;
-		changeHash(" ");
-
-		window.setTimeout(()=>{
-			window.location.hash = hash;
-		}, 1)
-	}
-};
-
-function open(el_class) {
-	if(mq.matches) {
-		window.setTimeout(()=> {
-			document.querySelector('.left').className += " closed";
-		}, 300)
-	}
-	var scr = window.scrollY;
-
-	window.scroll(0, scr);
-
-	scrollToItem(menuItems[el_class]);
-
-	for(var item in menuItems) {
-		if(item != el_class) {
-			document.querySelector(`#${item}_link`).className = '';
-		} else {
-			document.querySelector(`#${item}_link`).className = 'current';
-		}
-	}
-}
-
-window.onwheel = scrolled;
-
-window.addEventListener('touchmove', scrolled)
-
-
-function scrolled(e){
-
-	if(window._TO) {
-		clearTimeout(window._TO);
-	}
-
-    var height = Math.max(document.documentElement.clientHeight, window.innerHeight)/2;
-
-    if (checkVisible(menuItems.about, height, 'above')) {
-        changeLink('projects');
+    if(output !== undefined && output.constructor === Array) {
+      for (var i = 0; i < output.length; i++) {
+        if(i===0) {
+          printOut(output[i], 'return');
+          continue;
+        }
+        printOut(output[i], 'info');
+      }
     } else {
-        changeLink('about');
-    }
-    if (checkVisible(menuItems.projects, height, 'above')) {
-        changeLink('blog');
-    }
-    if (checkVisible(menuItems.blog, height, 'above')) {
-        changeLink('contact');
+      printOut(output, 'return');
     }
 
-}
 
-function scrollToItem(item) {
-    var diff=((item.offsetTop-40)-window.scrollY)/4
-
-
-		if (Math.abs(diff)>0.5) {
-        window.scrollTo(0, (window.scrollY+diff))
-        clearTimeout(window._TO)
-        window._TO=setTimeout(scrollToItem, 30, item)
-    } else {
-        window.scrollTo(0, item.offsetTop-40)
-    }
-}
-
-function changeHash(value) {
-	history.replaceState(undefined, undefined, "#" + value);
-}
-
-function checkVisible(elm, threshold, mode) {
-  threshold = threshold || 0;
-  mode = mode || 'visible';
-
-  var rect = elm.getBoundingClientRect();
-  var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-  var above = rect.bottom - threshold < 0;
-  var below = rect.top - viewHeight + threshold >= 0;
-
-  return mode === 'above' ? above : (mode === 'below' ? below : !above && !below);
-}
-
-function changeLink(current) {
-    for(var item in menuItems) {
-		if(item != current) {
-			document.querySelector(`#${item}_link`).className = '';
-		} else {
-			document.querySelector(`#${item}_link`).className = 'current';
-		}
+		content.scrollTop = 1e100;
 	}
+});
+
+const printOut = (out, className = '') => {
+  if(out === undefined) {
+    return;
+  }
+
+  const el = document.createElement('p');
+
+  el.className = className;
+  el.innerHTML = out;
+  content.appendChild(el);
 }
