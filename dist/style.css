@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Inconsolata);/* http://meyerweb.com/eric/tools/css/reset/
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -35,104 +35,60 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 body {
-  background: #ced4da;
-  font-size: 1.5em;
-  overflow: hidden; }
+  font-family: 'Roboto Mono', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fafafa; }
 
-.window {
+html {
+  font-size: 1em; }
+
+.container {
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 600px;
-  background: #212529;
-  box-shadow: 5px 5px 20px 0px #343a40;
-  animation: 1000ms scale-out forwards; }
+  transform: translateY(-50%);
+  left: 20vw; }
 
-.window .bar {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 30px;
-  background: #f8f9fa; }
-  .window .bar:before {
-    content: "// Rab Rennie";
-    font-family: 'Inconsolata', monospace;
-    color: #212529;
-    font-size: 0.8em;
-    line-height: 1.5em;
-    margin-left: 1em; }
+.title {
+  color: #1c7cd6;
+  font-size: 3rem;
+  margin-bottom: 2rem; }
 
-.window .content {
-  position: absolute;
-  bottom: 2.1em;
-  width: 100%;
-  max-height: Calc(520px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  color: #f8f9fa;
-  font-family: 'Inconsolata', monospace; }
-  .window .content p {
-    font-size: 1em;
-    margin: 5px 10px;
-    width: 100%;
-    word-wrap: break-word;
-    font-weight: 400; }
-    .window .content p a, .window .content p a:visited {
-      color: #a3daff;
-      text-decoration: none; }
-    .window .content p:before {
-      content: "> ";
-      color: #ffa8a8;
-      font-size: 0.9em; }
-    .window .content p.return:before {
-      content: "- ";
-      color: #ffa8a8;
-      font-size: 0.9em; }
-    .window .content p.info:before {
-      content: "\A0\A0";
-      color: #ffa8a8;
-      font-size: 0.9em; }
+.about {
+  width: 60rem;
+  max-width: 60vw;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  color: #212529; }
+  .about span {
+    background: #343a40;
+    color: #fafafa;
+    padding: 1px 1rem; }
+  .about p {
+    margin-top: 1rem; }
 
-.window input {
-  position: absolute;
-  bottom: 10px;
-  right: 0;
-  width: Calc(1170px);
-  height: 1em;
-  background: none;
-  border: none;
-  font-family: 'Inconsolata', monospace;
-  color: #f8f9fa;
-  font-size: 1em; }
-  .window input:focus {
-    outline: none; }
+.links {
+  max-width: 55vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between; }
 
-.window .symbol {
-  position: absolute;
-  bottom: 10px;
-  left: 8px;
-  color: #ffa8a8;
-  font-family: 'Inconsolata', monospace;
-  font-size: 1em; }
+a {
+  margin: 3rem 0;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: #1c7cd6;
+  border-bottom: 1px solid #fafafa; }
 
-.window .content::-webkit-scrollbar {
-  width: 7px; }
+a:hover {
+  border-bottom: 1px solid #1c7cd6; }
 
-.window .content::-webkit-scrollbar-track {
-  background: #1d2023;
-  border-radius: 10px; }
-
-.window .content::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: #161719;
-  height: 10px; }
-
-@keyframes scale-out {
-  0% {
-    transform: translate(-50%, -50%) scale(0); }
-  60% {
-    transform: translate(-50%, -50%) scale(1.2); }
-  100% {
-    transform: translate(-50%, -50%) scale(1); } }
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 0.8rem; }
+  .container {
+    position: relative;
+    top: 0;
+    transform: none;
+    left: 0;
+    margin: 2rem; }
+  .about, .links {
+    max-width: 80vw; } }
