@@ -67,13 +67,27 @@ a:hover {
     transform: none;
     left: 0;
     margin: 2rem;
+    text-align: center;
   }
 
+  .title {
+    color: #1862ab;
+  }
+
+	.links {
+		flex-wrap: wrap;
+	}
+
   .about, .links {
-    max-width: 80vw;
+    max-width: 100vw;
 
     a {
-
+			flex-basis: 100%;
+      font-size: 1.3rem;
+      background: #1c7cd6;
+      padding: 2rem;
+      margin: 1rem 0rem;
+      color: #fafafa;
     }
   }
 }
